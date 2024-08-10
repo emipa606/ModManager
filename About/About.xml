@@ -12,10 +12,25 @@
     <li>1.4</li>
     <li>1.5</li>
   </supportedVersions>
-  <modDependencies />
-  <loadAfter />
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+  </loadAfter>
   <description>[img]https://i.imgur.com/buuPQel.png[/img]
 Update of Fluffys mod https://steamcommunity.com/sharedfiles/filedetails/?id=1507748539
+[list]
+[*] Added option to skip countdown when publishing
+[*] Mods can now be tagged as translations when publishing
+[*] Mods already tagged as translation will have the translation-checkbox pre-filled
+[*] Added a dialog to set a custom changenote when publishing an update of a mod
+[/list]
 
 [img]https://i.imgur.com/pufA0kM.png[/img]
 
@@ -67,7 +82,7 @@ Allows modders to create a Manifest.xml file, enabling a bunch of features that 
 
 See [url=https://github.com/FluffierThanThou/ModManager/blob/master/ForModders.md]the documentation[/url] for details on how to implement this. It's easy!
 
-[h2]Details.png[/h2]
+[h2]Details[/h2]
 
 [b]local mod copies[/b]
 You can make a local copy of any steam mods (or all active steam mods at once) by clicking the corresponding button underneath the mod details (or active mods list). Doing this will make sure any updates to the steam version will not break your game in progress. Local mods are created in the RimWorld/Mods folder, and can be manually deleted, or deleted by clicking the corresponding button underneath the mod details.
@@ -117,8 +132,10 @@ All original content (e.g. text, imagery, sounds) in this mod is licensed under 
 Parts of the code in this mod, and some of the content may be licensed by their original authors. If this is the case, the original author &amp;amp; license will either be given in the source code, or be in a LICENSE file next to the content. Please do not decompile my mods, but use the original source code available on [url=https://github.com/fluffy-mods/ModManager/]GitHub[/url], so license information in the source code is preserved.
 
 Parts of this mod were created by, or derived from works created by;
-
-[list][*]Freepik: heart, lightbulb, fire, sword and top hat preview icon ([url=https://www.freepik.com/]BY-NC[/url])[*]Pixel perfect: bug preview icon ([url=https://icon54.com/]NC-BY[/url])[/list]
+[list]
+[*]Freepik: heart, lightbulb, fire, sword and top hat preview icon ([url=https://www.freepik.com/]BY-NC[/url])
+[*]Pixel perfect: bug preview icon ([url=https://icon54.com/]NC-BY[/url])
+[/list]
 
 [img]https://i.imgur.com/PwoNOj4.png[/img]
 [list]
@@ -129,6 +146,8 @@ Parts of this mod were created by, or derived from works created by;
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
 [*] Use [url=https://github.com/RimSort/RimSort/releases/latest]RimSort[/url] to sort your mods
-[/list]</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.1</modVersion>
+[/list]
+
+[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3306654341][img]https://img.shields.io/github/v/release/emipa606/ModManager?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url]</description>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.2</modVersion>
 </ModMetaData>

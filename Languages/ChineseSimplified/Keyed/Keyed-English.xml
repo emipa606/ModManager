@@ -109,7 +109,7 @@
   <Fluffy.ModManager.DeactivateMod>停用 {0}。</Fluffy.ModManager.DeactivateMod>
   <Fluffy.ModManager.MoveBefore>移动 {0} 到 {1} 之前加载。</Fluffy.ModManager.MoveBefore>
   <Fluffy.ModManager.MoveAfter>移动{0}到{1}之后加载。</Fluffy.ModManager.MoveAfter>
-  <Fluffy.ModManager.OpenDownloadUri>前往下载 location\n&lt;i&gt;{0}&lt;/i&gt;</Fluffy.ModManager.OpenDownloadUri>
+  <Fluffy.ModManager.OpenDownloadUri>前往下载 location\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>未提供下载位置。</Fluffy.ModManager.NoDownloadUri>
   <Fluffy.ModManager.XIsUpToDate>{0}是最新的蒸汽版本。</Fluffy.ModManager.XIsUpToDate>
   <Fluffy.ModManager.YHasUpdated>蒸汽版 {0} 已更新。</Fluffy.ModManager.YHasUpdated>
@@ -120,7 +120,7 @@
   <Fluffy.ModManager.ModHomePage>主页 ({0})</Fluffy.ModManager.ModHomePage>
   <Fluffy.ModManager.WorkshopPage>打开 {0} 的工作室页面</Fluffy.ModManager.WorkshopPage>
   <Fluffy.ModManager.DialogConfirmIssues>您可能需要在加载/启动新游戏前解决这些问题。</Fluffy.ModManager.DialogConfirmIssues>
-  <Fluffy.ModManager.DialogConfirmIssuesCritital>警告：使用此 MOD 列表可能会导致错误，并可能使游戏崩溃！&lt;/b&gt; &lt;/p</Fluffy.ModManager.DialogConfirmIssuesCritital>
+  <Fluffy.ModManager.DialogConfirmIssuesCritital>警告：使用此 MOD 列表可能会导致错误，并可能使游戏崩溃！&lt;/b> &lt;/p</Fluffy.ModManager.DialogConfirmIssuesCritital>
   <Fluffy.ModManager.DialogConfirmIssuesTitle>模块列表有 {0} 个问题！</Fluffy.ModManager.DialogConfirmIssuesTitle>
   <Fluffy.ModManager.ManifestNotImplemented>你应该告诉作者这很容易做到！</Fluffy.ModManager.ManifestNotImplemented>
   <Fluffy.ModManager.FetchingOnlineManifest>检查最新版本...</Fluffy.ModManager.FetchingOnlineManifest>

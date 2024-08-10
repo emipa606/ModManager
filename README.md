@@ -1,8 +1,16 @@
-# [Mod Manager (Continued)]()
+# [Mod Manager (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3306654341)
 
 ![Image](https://i.imgur.com/buuPQel.png)
 
 Update of Fluffys mod https://steamcommunity.com/sharedfiles/filedetails/?id=1507748539
+
+
+-  Added option to skip countdown when publishing
+-  Mods can now be tagged as translations when publishing
+-  Mods already tagged as translation will have the translation-checkbox pre-filled
+-  Added a dialog to set a custom changenote when publishing an update of a mod
+
+
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 	
@@ -55,7 +63,7 @@ Allows modders to create a Manifest.xml file, enabling a bunch of features that 
 
 See [the documentation](https://github.com/FluffierThanThou/ModManager/blob/master/ForModders.md) for details on how to implement this. It's easy!
 
-## Details.png
+## Details
 
 
 **local mod copies**
@@ -113,7 +121,9 @@ Parts of the code in this mod, and some of the content may be licensed by their 
 Parts of this mod were created by, or derived from works created by;
 
 
-- Freepik: heart, lightbulb, fire, sword and top hat preview icon ([BY-NC](https://www.freepik.com/))- Pixel perfect: bug preview icon ([NC-BY](https://icon54.com/))
+- Freepik: heart, lightbulb, fire, sword and top hat preview icon ([BY-NC](https://www.freepik.com/))
+- Pixel perfect: bug preview icon ([NC-BY](https://icon54.com/))
+
 
 
 ![Image](https://i.imgur.com/PwoNOj4.png)
@@ -129,3 +139,5 @@ Parts of this mod were created by, or derived from works created by;
 -  Use [RimSort](https://github.com/RimSort/RimSort/releases/latest) to sort your mods
 
 
+
+[![Image](https://img.shields.io/github/v/release/emipa606/ModManager?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3306654341)

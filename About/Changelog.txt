@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.5.2 - Missed Harmony-dependency in the about-file
+
+
 1.5.1 - Added option to skip countdown when publishing
 Mods can now be tagged as translations when publishing
 Mods already tagged as translation will have the translation-checkbox pre-filled
