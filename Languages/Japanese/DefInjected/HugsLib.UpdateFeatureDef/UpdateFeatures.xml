@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <Mod_Manager_3_3_962.modNameReadable>Mod Manager</Mod_Manager_3_3_962.modNameReadable>
   <Mod_Manager_3_3_962.content>ModManagerはRimWorld1.2用に更新され、多くの改善とバグ修正が行われました;
 　　・ユーザーデータ（例：modの色）がランダムにリセットされなくなりました
@@ -18,5 +17,4 @@
       |私は1.1より前のすべての機能を復旧して実行することに取り組んでおり、何人かの寛大なボランティアと私はModManagerの次の段階になるものに取り組んでいます。 Mod Managerがどこに向かっているのか、そしてその過程でどのように発言権を持つことができるのかについて、soon™で詳しく知ることができます。
 
     </Mod_Manager_3_3_962.content>
-
 </LanguageData>

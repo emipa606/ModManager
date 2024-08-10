@@ -1,0 +1,8 @@
+# Changelog for ModManager
+
+1.5.1 - Added option to skip countdown when publishing
+Mods can now be tagged as translations when publishing
+Mods already tagged as translation will have the translation-checkbox pre-filled
+Added a dialog to set a custom changenote when publishing an update of a mod
+Used DeepL to update translations for ChineseSimplified, French, German, Italian, Japanese, Russian, Turkish
+

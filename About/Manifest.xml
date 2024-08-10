@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Manifest>
-  <version>3.8.1038</version>
-  <manifestUri>https://raw.githubusercontent.com/fluffy-mods/ModManager/1.2/About/Manifest.xml</manifestUri>
-  <downloadUri>https://github.com/fluffy-mods/ModManager/releases/v3.8.1038</downloadUri>
+  <identifier>ModManager</identifier>
+  <version>1.5.1</version>
+  <dependencies />
+  <incompatibleWith />
+  <loadBefore />
+  <loadAfter />
+  <manifestUri>https://raw.githubusercontent.com/emipa606/ModManager/master/About/Manifest.xml</manifestUri>
+  <downloadUri>https://github.com/emipa606/ModManager/releases</downloadUri>
 </Manifest>
