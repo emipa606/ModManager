@@ -1,5 +1,9 @@
 # Changelog for ModManager
 
+1.5.3 - Fixed the confusing vanilla mod-changed window
+Used DeepL to update translations for ChineseSimplified, French, German, Italian, Japanese, Russian, Turkish
+
+
 1.5.2 - Missed Harmony-dependency in the about-file
 
 

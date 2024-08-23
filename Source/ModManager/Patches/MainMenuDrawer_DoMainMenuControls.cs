@@ -40,7 +40,8 @@ public static class MainMenuDrawer_DoMainMenuControls
 
             if (modsFound && !done && instruction.opcode == OpCodes.Ldftn)
             {
-                instruction.operand = AccessTools.Method(typeof(MainMenuDrawer_DoMainMenuControls), "OpenModsConfig");
+                instruction.operand =
+                    AccessTools.Method(typeof(MainMenuDrawer_DoMainMenuControls), nameof(OpenModsConfig));
                 done = true;
             }
 

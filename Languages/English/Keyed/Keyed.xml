@@ -74,6 +74,7 @@
   <Fluffy.ModManager.XModsImportedFromString>{0} mods imported from string</Fluffy.ModManager.XModsImportedFromString>
   <!-- End replacement strings -->
   <Fluffy.ModManager.ResetMods>Reset active modlist to a blank modlist</Fluffy.ModManager.ResetMods>
+  <Fluffy.ModManager.CachingMods>Caching modlist</Fluffy.ModManager.CachingMods>
   <Fluffy.ModManager.ConfirmResetMods>Are you sure?\n\nThis will de-activate your entire modlist. Make sure to export it first if you want to save your mod order.</Fluffy.ModManager.ConfirmResetMods>
   <Fluffy.ModManager.SortMods>Auto-sort mod list</Fluffy.ModManager.SortMods>
   <Fluffy.ModManager.SortFailed.CyclicDependency>Cannot auto-sort mod list; {0} and {1} depend on eachother.</Fluffy.ModManager.SortFailed.CyclicDependency>

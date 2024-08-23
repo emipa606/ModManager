@@ -63,7 +63,6 @@ public class FloatMenuOption_Aligned : FloatMenuOption
 
         // create and position extra part rect
         var doExtraPart = extraPartOnGUI != null && extraPartWidth > 0f;
-        var extraPartHovered = false;
         var extraPartRect = Rect.zero;
         if (doExtraPart)
         {
@@ -81,8 +80,6 @@ public class FloatMenuOption_Aligned : FloatMenuOption
             {
                 extraPartRect.x = canvas.xMax - extraPartWidth - HorizontalMargin;
             }
-
-            extraPartHovered = Mouse.IsOver(extraPartRect);
         }
 
         // UI effects

@@ -372,7 +372,8 @@ public class Page_BetterModConfig : Page_ModsConfig
     private void DoExportModListFloatMenu()
     {
         var options = Utilities.NewOptionsList;
-        options.Add(new FloatMenuOption(I18n.Export_ToModList, () => new ModList(ModButtonManager.ActiveButtons)));
+        options.Add(new FloatMenuOption(I18n.Export_ToModList,
+            () => { _ = new ModList(ModButtonManager.ActiveButtons); }));
         options.Add(new FloatMenuOption(I18n.Export_ToString, delegate
         {
             var modlist = new ModList(ModButtonManager.ActiveButtons, true);
@@ -1076,6 +1077,12 @@ public class Page_BetterModConfig : Page_ModsConfig
             Find.WindowStack.TryRemove(this, doCloseSound);
         }
     }
+
+    public override bool OnCloseRequest()
+    {
+        return true;
+    }
+
 
     public override void PostClose()
     {

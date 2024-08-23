@@ -6,7 +6,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.5.0</FileVersion>
+    <FileVersion>1.5.3</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
@@ -20,7 +20,7 @@
     </PackageReference>
     <PackageReference Include="SemanticVersioning" Version="*" />
     <PackageReference Include="YamlDotNet" Version="*" />
-	  <PackageReference Include="Mlie_Rimworld_VersionFromManifest" Version="*" />
+    <PackageReference Include="Mlie_Rimworld_VersionFromManifest" Version="*" />
     <ProjectReference Include="..\ColourPicker\ColourPicker.csproj">
       <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
       <CopyLocal>False</CopyLocal>

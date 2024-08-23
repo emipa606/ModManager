@@ -48,7 +48,7 @@ And, if supported by the mod author;
 
 
 
-## For Modders.png
+## For Modders
 
 
 Allows modders to create a Manifest.xml file, enabling a bunch of features that should have been in vanilla;
