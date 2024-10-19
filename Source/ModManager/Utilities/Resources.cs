@@ -50,6 +50,8 @@ public class Resources
 
     public static readonly Texture2D[] Spinner;
 
+    public static readonly Color WindowBGBorderColor = new ColorInt(97, 108, 122).ToColor;
+
     static Resources()
     {
         SlightlyDarkBackground = new Color(0f, 0f, 0f, .2f);
@@ -76,5 +78,16 @@ public class Resources
         Status_Plus = ContentFinder<Texture2D>.Get("UI/Icons/Status/Plus");
 
         Spinner = ContentFinder<Texture2D>.GetAllInFolder("UI/Icons/Spinner").ToArray();
+    }
+
+    public static void DrawWindowBackground(Rect rect, Color bgColor)
+    {
+        GUI.color = Widgets.WindowBGFillColor;
+        GUI.DrawTexture(rect, BaseContent.WhiteTex);
+        GUI.color = bgColor;
+        GUI.DrawTexture(rect, BaseContent.WhiteTex);
+        GUI.color = WindowBGBorderColor;
+        Widgets.DrawBox(rect);
+        GUI.color = Color.white;
     }
 }

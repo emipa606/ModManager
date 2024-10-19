@@ -175,4 +175,7 @@
   <Fluffy.ModManager.AddChangenote>Ajouter une note de modification</Fluffy.ModManager.AddChangenote>
   <Fluffy.ModManager.AddChangenoteInfo>Inclure des informations sur cette mise à jour, ou laisser vide pour utiliser le texte par défaut.</Fluffy.ModManager.AddChangenoteInfo>
   <Fluffy.ModManager.SkipPublishingCountdown>Sauter le compte à rebours lors de la publication de mods</Fluffy.ModManager.SkipPublishingCountdown>
+  <Fluffy.ModManager.Reset>Remise à zéro</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>Réinitialiser tous les paramètres</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>Couleur d'arrière-plan</Fluffy.ModManager.BackgroundColor>
 </LanguageData>

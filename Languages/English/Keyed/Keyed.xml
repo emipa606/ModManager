@@ -12,7 +12,10 @@
   <Fluffy.ModManager.TargetVersions>This mod supports RimWorld version(s) {0}</Fluffy.ModManager.TargetVersions>
   <Fluffy.ModManager.Unknown>Unknown</Fluffy.ModManager.Unknown>
   <Fluffy.ModManager.Later>Later</Fluffy.ModManager.Later>
+  <Fluffy.ModManager.Reset>Reset</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>Reset all settings</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.Cancel>Cancel</Fluffy.ModManager.Cancel>
+  <Fluffy.ModManager.BackgroundColor>Background color</Fluffy.ModManager.BackgroundColor>
   <Fluffy.ModManager.YesAsTranslation>Yes (Translation)</Fluffy.ModManager.YesAsTranslation>
   <Fluffy.ModManager.PressXtoCopyToClipboard>Press 'Control + C' to copy the ModList to the clipboard.</Fluffy.ModManager.PressXtoCopyToClipboard>
   <!-- issues -->

@@ -178,4 +178,7 @@
   <Fluffy.ModManager.AddChangenote>チェンジノートを追加</Fluffy.ModManager.AddChangenote>
   <Fluffy.ModManager.AddChangenoteInfo>このアップデートに関する情報を入力するか、空白のままデフォルトのテキストを使用する。</Fluffy.ModManager.AddChangenoteInfo>
   <Fluffy.ModManager.SkipPublishingCountdown>MOD公開時にカウントダウンをスキップ</Fluffy.ModManager.SkipPublishingCountdown>
+  <Fluffy.ModManager.Reset>リセット</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>すべての設定をリセットする</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>背景色</Fluffy.ModManager.BackgroundColor>
 </LanguageData>

@@ -1,3 +1,4 @@
+using ColourPicker;
 using UnityEngine;
 using Verse;
 
@@ -8,6 +9,7 @@ public class ModManagerSettings : ModSettings
     public bool AddExpansionsToNewModLists = true;
     public bool AddHugsLibToNewModLists;
     public bool AddModManagerToNewModLists = true;
+    public Color BackgroundColor = new Color(0f, 0f, 0f, 0.1f);
 
     public bool ShowPromotions = true;
     public bool ShowPromotions_NotActive;
@@ -37,6 +39,7 @@ public class ModManagerSettings : ModSettings
         Scribe_Values.Look(ref ShowVersionChecksOnSteamMods, "ShowVersionChecksOnSteamMods");
         Scribe_Values.Look(ref UseTempFolderForCrossPromotions, "UseTempFolderForCrossPromotions");
         Scribe_Values.Look(ref SurveyNotificationShown, "SurveyNotificationShown");
+        Scribe_Values.Look(ref BackgroundColor, "BackgroundColor", new Color(0f, 0f, 0f, 0.1f));
     }
 
 
@@ -112,6 +115,24 @@ public class ModManagerSettings : ModSettings
             I18n.AddExpansionsToNewModListTip);
         listing.Gap();
         listing.CheckboxLabeled("Fluffy.ModManager.SkipPublishingCountdown".Translate(), ref SkipPublishingCountdown);
+
+        var colorRect = listing.GetRect(30f);
+        Widgets.Label(colorRect.LeftHalf(), "Fluffy.ModManager.BackgroundColor".Translate());
+        Widgets.DrawBoxSolidWithOutline(colorRect.RightHalf().RightHalf(), BackgroundColor,
+            Resources.WindowBGBorderColor, 2);
+        if (Widgets.ButtonInvisible(colorRect.RightHalf().RightHalf()))
+        {
+            Find.WindowStack.Add(new Dialog_ColourPicker(BackgroundColor,
+                color => { BackgroundColor = color; }));
+        }
+
+        listing.GapLine();
+        if (listing.ButtonTextLabeledPct("Fluffy.ModManager.ResetLabel".Translate(),
+                "Fluffy.ModManager.Reset".Translate(), 0.75f))
+        {
+            Reset();
+        }
+
         if (ModManager.CurrentVersion != null)
         {
             listing.Gap();
@@ -121,5 +142,21 @@ public class ModManagerSettings : ModSettings
         }
 
         listing.End();
+    }
+
+    private void Reset()
+    {
+        ShowPromotions = true;
+        ShowPromotions_NotSubscribed = true;
+        ShowPromotions_NotActive = false;
+        ShowSatisfiedRequirements = false;
+        ShowVersionChecksOnSteamMods = false;
+        TrimTags = true;
+        TrimVersionStrings = false;
+        AddHugsLibToNewModLists = true;
+        AddModManagerToNewModLists = true;
+        AddExpansionsToNewModLists = true;
+        UseTempFolderForCrossPromotions = false;
+        BackgroundColor = new Color(0f, 0f, 0f, 0.1f);
     }
 }

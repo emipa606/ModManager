@@ -49,6 +49,7 @@ public class Page_BetterModConfig : Page_ModsConfig
 
     public Page_BetterModConfig()
     {
+        doWindowBackground = false;
         Instance = this;
         closeOnAccept = false;
         closeOnCancel = true;
@@ -142,6 +143,12 @@ public class Page_BetterModConfig : Page_ModsConfig
     public List<ModButton> FilteredActiveButtons => ModButtonManager.ActiveButtons
         .Where(b => !FilterActive || b.MatchesFilter(_activeFilter) > 0)
         .ToList();
+
+    public override void WindowOnGUI()
+    {
+        base.WindowOnGUI();
+        DrawWindowBackground(windowRect, ModManager.Settings.BackgroundColor);
+    }
 
     public override void
         ExtraOnGUI()

@@ -179,4 +179,7 @@
   <Fluffy.ModManager.CrossPromotionCacheFolderSize>Cache-Größe: {0}</Fluffy.ModManager.CrossPromotionCacheFolderSize>
   <Fluffy.ModManager.DeleteCrossPromotionCache>Cache löschen</Fluffy.ModManager.DeleteCrossPromotionCache>
   <Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>Sind Sie sicher, dass Sie den Cache leeren wollen? Dadurch werden alle {1} Dateien in {0} unwiderruflich entfernt, wodurch {2} frei wird.</Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>
+  <Fluffy.ModManager.Reset>Zurücksetzen</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>Alle Einstellungen zurücksetzen</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>Hintergrundfarbe</Fluffy.ModManager.BackgroundColor>
 </LanguageData>

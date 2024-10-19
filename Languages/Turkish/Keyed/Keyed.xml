@@ -178,4 +178,7 @@
   <Fluffy.ModManager.CrossPromotionCacheFolderSize>Önbellek boyutu: {0}</Fluffy.ModManager.CrossPromotionCacheFolderSize>
   <Fluffy.ModManager.DeleteCrossPromotionCache>Önbelleği temizle</Fluffy.ModManager.DeleteCrossPromotionCache>
   <Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>Önbelleği temizlemek istediğinizden emin misiniz? \n\nBu, {0} içindeki tüm {1} dosya(lar)ını geri alınamaz bir şekilde kaldıracak ve {2}'yi serbest bırakacaktır.</Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>
+  <Fluffy.ModManager.Reset>Sıfırla</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>Tüm ayarları sıfırla</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>Arka plan rengi</Fluffy.ModManager.BackgroundColor>
 </LanguageData>

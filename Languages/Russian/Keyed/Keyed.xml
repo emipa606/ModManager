@@ -178,4 +178,7 @@
   <Fluffy.ModManager.CrossPromotionCacheFolderSize>Размер кэша: {0}</Fluffy.ModManager.CrossPromotionCacheFolderSize>
   <Fluffy.ModManager.DeleteCrossPromotionCache>Очистить кэш</Fluffy.ModManager.DeleteCrossPromotionCache>
   <Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>Вы уверены, что хотите очистить кэш?\n\nЭто безвозвратно удалит все файлы {1} в {0}, освободив {2}.</Fluffy.ModManager.ConfirmDeletingCrossPromotionCache>
+  <Fluffy.ModManager.Reset>Сброс</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>Сброс всех настроек</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>Цвет фона</Fluffy.ModManager.BackgroundColor>
 </LanguageData>

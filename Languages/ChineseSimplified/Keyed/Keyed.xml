@@ -175,4 +175,7 @@
   <Fluffy.ModManager.AddChangenote>添加变更注释</Fluffy.ModManager.AddChangenote>
   <Fluffy.ModManager.AddChangenoteInfo>包含有关此更新的信息，或留空使用默认文本</Fluffy.ModManager.AddChangenoteInfo>
   <Fluffy.ModManager.SkipPublishingCountdown>发布修改器时跳过倒计时</Fluffy.ModManager.SkipPublishingCountdown>
+  <Fluffy.ModManager.Reset>重置</Fluffy.ModManager.Reset>
+  <Fluffy.ModManager.ResetLabel>重置所有设置</Fluffy.ModManager.ResetLabel>
+  <Fluffy.ModManager.BackgroundColor>背景颜色</Fluffy.ModManager.BackgroundColor>
 </LanguageData>
