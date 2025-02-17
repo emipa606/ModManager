@@ -4,12 +4,12 @@
     <AssemblyTitle>ColourPicker</AssemblyTitle>
     <Product>ColourPicker</Product>
     <OutputPath>../../1.5/Assemblies</OutputPath>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net481</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.5.4</FileVersion>
+    <FileVersion>1.5.5</FileVersion>
     <Copyright>Copyright © 2015-2021</Copyright>
   </PropertyGroup>
   <ItemGroup>

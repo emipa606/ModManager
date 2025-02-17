@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <!-- cancel button on confirmation(s) -->
   <Cancel>Annuler</Cancel>
@@ -97,7 +97,7 @@
   <Fluffy.ModManager.DeactivateMod>Désactiver {0}.</Fluffy.ModManager.DeactivateMod>
   <Fluffy.ModManager.MoveBefore>Déplacer {0} pour se charger avant {1}.</Fluffy.ModManager.MoveBefore>
   <Fluffy.ModManager.MoveAfter>Déplacer {0} pour se charger après {1}.</Fluffy.ModManager.MoveAfter>
-  <Fluffy.ModManager.OpenDownloadUri>Aller à la page de téléchargement\n&lt;i&gt;{0}&lt;/i&gt;</Fluffy.ModManager.OpenDownloadUri>
+  <Fluffy.ModManager.OpenDownloadUri>Aller à la page de téléchargement\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>Aucun lien de téléchargement indiqué.</Fluffy.ModManager.NoDownloadUri>
   <Fluffy.ModManager.XIsUpToDate>{0} est à jour avec la version de Steam.</Fluffy.ModManager.XIsUpToDate>
   <Fluffy.ModManager.YHasUpdated>La version de Steam de {0} a été mise à jour.</Fluffy.ModManager.YHasUpdated>
@@ -111,7 +111,7 @@
   <Fluffy.ModManager.WorkshopPage>Ouvrir la page Steam Workshop de {0}</Fluffy.ModManager.WorkshopPage>
   <!-- confirmation dialog 0: issue count, 1: issue list -->
   <Fluffy.ModManager.DialogConfirmIssues>Vous devriez souhaiter résoudre ces problèmes avant de charger ou de commencer une nouvelle partie.\n\n{1}</Fluffy.ModManager.DialogConfirmIssues>
-  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b&gt;\n\nATTENTION: Utiliser cette liste de mods va probablement causer des erreurs et peut crasher le jeu!&lt;/b&gt;</Fluffy.ModManager.DialogConfirmIssuesCritital>
+  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b>\n\nATTENTION: Utiliser cette liste de mods va probablement causer des erreurs et peut crasher le jeu!&lt;/b></Fluffy.ModManager.DialogConfirmIssuesCritital>
   <Fluffy.ModManager.DialogConfirmIssuesTitle>La liste de mods a {0} problèmes !</Fluffy.ModManager.DialogConfirmIssuesTitle>
   <!-- online manifest -->
   <Fluffy.ModManager.ManifestNotImplemented>Ce mod n'a pas de fichier manifest, ou n'implémente pas de vérification de version. Vous devriez dire à l'auteur que c'est vraiment facile à faire !</Fluffy.ModManager.ManifestNotImplemented>
@@ -178,4 +178,5 @@
   <Fluffy.ModManager.Reset>Remise à zéro</Fluffy.ModManager.Reset>
   <Fluffy.ModManager.ResetLabel>Réinitialiser tous les paramètres</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Couleur d'arrière-plan</Fluffy.ModManager.BackgroundColor>
+  <Fluffy.ModManager.CachingModsMessage>Attendez, la liste des modèles est en train d'être chargée</Fluffy.ModManager.CachingModsMessage>
 </LanguageData>

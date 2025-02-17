@@ -9,6 +9,7 @@ Update of Fluffys mod https://steamcommunity.com/sharedfiles/filedetails/?id=150
 -  Mods can now be tagged as translations when publishing
 -  Mods already tagged as translation will have the translation-checkbox pre-filled
 -  Added a dialog to set a custom changenote when publishing an update of a mod
+-  Added selectable background color
 
 
 

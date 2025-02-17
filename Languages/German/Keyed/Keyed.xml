@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <Fluffy.ModManager.AvailableMods>Verfügbar</Fluffy.ModManager.AvailableMods>
   <Fluffy.ModManager.ActiveMods>Aktiv</Fluffy.ModManager.ActiveMods>
@@ -99,7 +99,7 @@
   <Fluffy.ModManager.ModHomePage>Startseite ({0})</Fluffy.ModManager.ModHomePage>
   <Fluffy.ModManager.WorkshopPage>Öffnet die Workshop-Seite von {0}</Fluffy.ModManager.WorkshopPage>
   <!-- confirmation dialog 0: issue count, 1: issue list -->
-  <Fluffy.ModManager.DialogConfirmIssues>Sie sollten diese Probleme lösen, bevor Sie ein neues Spiel laden/starten.&lt;b&gt;\n\nWARNUNG: Die Verwendung dieser Mod-Liste wird wahrscheinlich Fehler verursachen und kann das Spiel zum Absturz bringen!&lt;/b&gt;\n\n{0}</Fluffy.ModManager.DialogConfirmIssues>
+  <Fluffy.ModManager.DialogConfirmIssues>Sie sollten diese Probleme lösen, bevor Sie ein neues Spiel laden/starten.&lt;b>\n\nWARNUNG: Die Verwendung dieser Mod-Liste wird wahrscheinlich Fehler verursachen und kann das Spiel zum Absturz bringen!&lt;/b>\n\n{0}</Fluffy.ModManager.DialogConfirmIssues>
   <Fluffy.ModManager.DialogConfirmIssuesTitle>Mod-Liste hat {0} Probleme!</Fluffy.ModManager.DialogConfirmIssuesTitle>
   <!-- online manifest -->
   <Fluffy.ModManager.ManifestNotImplemented>Diese Mod hat kein Manifest, oder implementiert keine Versionskontrolle.\n\nDu solltest dem Autor sagen, dass dies wirklich einfach zu tun ist!</Fluffy.ModManager.ManifestNotImplemented>
@@ -155,12 +155,12 @@
   <Fluffy.ModManager.SortMods>Mod-Liste automatisch sortieren</Fluffy.ModManager.SortMods>
   <Fluffy.ModManager.SortFailed.CyclicDependency>Automatische Sortierung der Mod-Liste nicht möglich</Fluffy.ModManager.SortFailed.CyclicDependency>
   <Fluffy.ModManager.ModListExists>{0} existiert bereits. Bitte verwenden Sie einen anderen Namen, oder löschen oder benennen Sie die vorhandene Modliste um.</Fluffy.ModManager.ModListExists>
-  <Fluffy.ModManager.OpenDownloadUri>Zum Herunterladen gehen\n&lt;i&gt;{0}&lt;/i&gt;</Fluffy.ModManager.OpenDownloadUri>
+  <Fluffy.ModManager.OpenDownloadUri>Zum Herunterladen gehen\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>Kein Download-Speicherort angegeben.</Fluffy.ModManager.NoDownloadUri>
   <Fluffy.ModManager.XIsUpToDate>{0} ist mit der Steam-Version auf dem neuesten Stand.</Fluffy.ModManager.XIsUpToDate>
   <Fluffy.ModManager.YHasUpdated>Die Steam-Version von {0} wurde aktualisiert.</Fluffy.ModManager.YHasUpdated>
   <Fluffy.ModManager.ContentSource.ModsFolder>Lokales</Fluffy.ModManager.ContentSource.ModsFolder>
-  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b&gt;WARNUNG: Die Verwendung dieser Mod-Liste wird wahrscheinlich Fehler verursachen und kann das Spiel zum Absturz bringen!&lt;/b&gt;</Fluffy.ModManager.DialogConfirmIssuesCritital>
+  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b>WARNUNG: Die Verwendung dieser Mod-Liste wird wahrscheinlich Fehler verursachen und kann das Spiel zum Absturz bringen!&lt;/b></Fluffy.ModManager.DialogConfirmIssuesCritital>
   <Fluffy.ModManager.AddChangenote>Änderungsvermerk hinzufügen</Fluffy.ModManager.AddChangenote>
   <Fluffy.ModManager.AddChangenoteInfo>Fügen Sie einige Informationen über diese Aktualisierung ein, oder lassen Sie es leer, um den Standardtext zu verwenden</Fluffy.ModManager.AddChangenoteInfo>
   <Fluffy.ModManager.SkipPublishingCountdown>Countdown beim Veröffentlichen von Mods überspringen</Fluffy.ModManager.SkipPublishingCountdown>
@@ -182,4 +182,5 @@
   <Fluffy.ModManager.Reset>Zurücksetzen</Fluffy.ModManager.Reset>
   <Fluffy.ModManager.ResetLabel>Alle Einstellungen zurücksetzen</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Hintergrundfarbe</Fluffy.ModManager.BackgroundColor>
+  <Fluffy.ModManager.CachingModsMessage>Warte, die Modliste wird geladen</Fluffy.ModManager.CachingModsMessage>
 </LanguageData>

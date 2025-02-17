@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <Fluffy.ModManager.AvailableMods>Mevcut</Fluffy.ModManager.AvailableMods>
   <Fluffy.ModManager.ActiveMods>Aktif</Fluffy.ModManager.ActiveMods>
@@ -99,7 +99,7 @@
   <Fluffy.ModManager.ModHomePage>Ana sayfa ({0})</Fluffy.ModManager.ModHomePage>
   <Fluffy.ModManager.WorkshopPage>{0} modunun Workshop sayfasını aç</Fluffy.ModManager.WorkshopPage>
   <!-- confirmation dialog 0: issue count, 1: issue list -->
-  <Fluffy.ModManager.DialogConfirmIssues>Oyunu yüklemek/başlatmak için sorunları düzeltmelisin.&lt;b&gt;\n\nUYARI: mod listesi kullanmak genellikle problemlere yol açar, ve oyununuz crash verebilir!&lt;/b&gt;\n\n{0}</Fluffy.ModManager.DialogConfirmIssues>
+  <Fluffy.ModManager.DialogConfirmIssues>Oyunu yüklemek/başlatmak için sorunları düzeltmelisin.&lt;b>\n\nUYARI: mod listesi kullanmak genellikle problemlere yol açar, ve oyununuz crash verebilir!&lt;/b>\n\n{0}</Fluffy.ModManager.DialogConfirmIssues>
   <Fluffy.ModManager.DialogConfirmIssuesTitle>Mod listesinde {0} adet problem!</Fluffy.ModManager.DialogConfirmIssuesTitle>
   <!-- online manifest -->
   <Fluffy.ModManager.ManifestNotImplemented>Bu modun "manifest" dosyası yok, yada güncelleme desteği yok.\n\nBunu mod yapımcısına söylemelisin ayrıca yapmasıda çok kolay!</Fluffy.ModManager.ManifestNotImplemented>
@@ -154,12 +154,12 @@
   <Fluffy.ModManager.ConfirmResetMods>Emin misiniz? Bu, tüm mod listenizi devre dışı bırakacaktır. Mod sıranızı kaydetmek istiyorsanız önce dışa aktardığınızdan emin olun.</Fluffy.ModManager.ConfirmResetMods>
   <Fluffy.ModManager.SortMods>Mod listesini otomatik sırala</Fluffy.ModManager.SortMods>
   <Fluffy.ModManager.SortFailed.CyclicDependency>Mod listesi otomatik sıralanamıyor</Fluffy.ModManager.SortFailed.CyclicDependency>
-  <Fluffy.ModManager.OpenDownloadUri>İndirme konumuna git\n&lt;i&gt;{0}&lt;/i&gt;</Fluffy.ModManager.OpenDownloadUri>
+  <Fluffy.ModManager.OpenDownloadUri>İndirme konumuna git\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>İndirme konumu sağlanmadı.</Fluffy.ModManager.NoDownloadUri>
   <Fluffy.ModManager.XIsUpToDate>{0} buhar sürümü ile günceldir.</Fluffy.ModManager.XIsUpToDate>
   <Fluffy.ModManager.YHasUpdated>0}'ın buhar sürümü güncellendi.</Fluffy.ModManager.YHasUpdated>
   <Fluffy.ModManager.ContentSource.ModsFolder>Yerel</Fluffy.ModManager.ContentSource.ModsFolder>
-  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b&gt;\n\nUYARI: Bu mod listesini kullanmak büyük olasılıkla hatalara neden olacak ve oyunu çökertebilir!&lt;/b&gt;</Fluffy.ModManager.DialogConfirmIssuesCritital>
+  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b>\n\nUYARI: Bu mod listesini kullanmak büyük olasılıkla hatalara neden olacak ve oyunu çökertebilir!&lt;/b></Fluffy.ModManager.DialogConfirmIssuesCritital>
   <Fluffy.ModManager.AddChangenote>Değişiklik notu ekle</Fluffy.ModManager.AddChangenote>
   <Fluffy.ModManager.AddChangenoteInfo>Bu güncelleme hakkında bazı bilgiler ekleyin veya varsayılan metni kullanmak için boş bırakın</Fluffy.ModManager.AddChangenoteInfo>
   <Fluffy.ModManager.SkipPublishingCountdown>Modları yayınlarken geri sayımı atla</Fluffy.ModManager.SkipPublishingCountdown>
@@ -181,4 +181,5 @@
   <Fluffy.ModManager.Reset>Sıfırla</Fluffy.ModManager.Reset>
   <Fluffy.ModManager.ResetLabel>Tüm ayarları sıfırla</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Arka plan rengi</Fluffy.ModManager.BackgroundColor>
+  <Fluffy.ModManager.CachingModsMessage>Bekle, mod listesi yükleniyor</Fluffy.ModManager.CachingModsMessage>
 </LanguageData>

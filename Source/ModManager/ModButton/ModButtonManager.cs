@@ -341,7 +341,7 @@ public static class ModButtonManager
 
             foreach (var target in installedActiveButton.Manifest.LoadBefore
                          .Select(d => d.Target)
-                         .Where(t => t != null))
+                         .Where(t => t is { Active: true }))
             {
                 var targetButton = ModButton_Installed.For(target);
                 if (!graph.ContainsKey(targetButton))
@@ -352,11 +352,21 @@ public static class ModButtonManager
                 graph[targetButton].Add(activeButton);
             }
 
-
             foreach (var target in installedActiveButton.Manifest.LoadAfter
-                         .Concat(installedActiveButton.Manifest.Dependencies)
                          .Select(d => d.Target)
-                         .Where(t => t != null))
+                         .Where(t => t is { Active: true }))
+            {
+                var targetButton = ModButton_Installed.For(target);
+                graph[activeButton].Add(targetButton);
+                if (!graph.ContainsKey(targetButton))
+                {
+                    graph[targetButton] = [];
+                }
+            }
+
+            foreach (var target in installedActiveButton.Manifest.Dependencies
+                         .Select(d => d.Target)
+                         .Where(t => t is not null))
             {
                 var targetButton = ModButton_Installed.For(target);
                 graph[activeButton].Add(targetButton);

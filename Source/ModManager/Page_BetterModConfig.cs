@@ -1059,6 +1059,7 @@ public class Page_BetterModConfig : Page_ModsConfig
     public override void PreOpen()
     {
         base.PreOpen();
+
         _activeModsHash = ModLister.InstalledModsListHash(true);
         ModButtonManager.InitializeModButtons();
         ModButtonManager.Notify_RecacheModMetaData();

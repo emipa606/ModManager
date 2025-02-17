@@ -1,5 +1,10 @@
 # Changelog for ModManager
 
+1.5.5 - Should no longer activate mods unless they are defined dependencies
+Fixed unsubscribing from mods
+Used DeepL to update translations for ChineseSimplified, French, German, Italian, Japanese, Russian, Turkish
+
+
 1.5.4 - Added selectable background color
 Used DeepL to update translations for ChineseSimplified, French, German, Italian, Japanese, Russian, Turkish
 

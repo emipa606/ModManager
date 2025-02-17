@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <!-- cancel button on confirmation(s) -->
   <Cancel>Annulla</Cancel>
@@ -96,7 +96,7 @@
   <Fluffy.ModManager.DeactivateMod>Disattiva {0}.</Fluffy.ModManager.DeactivateMod>
   <Fluffy.ModManager.MoveBefore>Sposta {0} per essere caricata prima di {1}.</Fluffy.ModManager.MoveBefore>
   <Fluffy.ModManager.MoveAfter>Sposta {0} per essere caricata dopo di {1}.</Fluffy.ModManager.MoveAfter>
-  <Fluffy.ModManager.OpenDownloadUri>Vai al download\n&lt;i&gt;{0}&lt;/i&gt;</Fluffy.ModManager.OpenDownloadUri>
+  <Fluffy.ModManager.OpenDownloadUri>Vai al download\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>Nessun link per il download disponibile.</Fluffy.ModManager.NoDownloadUri>
   <Fluffy.ModManager.XIsUpToDate>{0} è aggiornato con la versione di Steam.</Fluffy.ModManager.XIsUpToDate>
   <Fluffy.ModManager.YHasUpdated>La versione di Steam di {0} è stata aggiornata.</Fluffy.ModManager.YHasUpdated>
@@ -110,7 +110,7 @@
   <Fluffy.ModManager.WorkshopPage>Apri la pagina Workshop di {0}</Fluffy.ModManager.WorkshopPage>
   <!-- confirmation dialog 0: issue count, 1: issue list -->
   <Fluffy.ModManager.DialogConfirmIssues>Dovresti risolvere questi problemi prima di caricare/iniziare una nuova partita.\n\n{1}</Fluffy.ModManager.DialogConfirmIssues>
-  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b&gt;\n\nAVVISO: L'uso di questa modlist causerà sicuramente errori, e far chiudere il gioco!&lt;/b&gt;</Fluffy.ModManager.DialogConfirmIssuesCritital>
+  <Fluffy.ModManager.DialogConfirmIssuesCritital>&lt;b>\n\nAVVISO: L'uso di questa modlist causerà sicuramente errori, e far chiudere il gioco!&lt;/b></Fluffy.ModManager.DialogConfirmIssuesCritital>
   <Fluffy.ModManager.DialogConfirmIssuesTitle>La modlist ha {0} problemi!</Fluffy.ModManager.DialogConfirmIssuesTitle>
   <!-- online manifest -->
   <Fluffy.ModManager.ManifestNotImplemented>Questa mod non ha manifest, o non implementa il controllo di versione.\n\nDovresti dire all'autore che è davvero molto facile da fare!</Fluffy.ModManager.ManifestNotImplemented>
@@ -177,4 +177,5 @@
   <Fluffy.ModManager.Reset>Reset</Fluffy.ModManager.Reset>
   <Fluffy.ModManager.ResetLabel>Ripristino di tutte le impostazioni</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Colore di sfondo</Fluffy.ModManager.BackgroundColor>
+  <Fluffy.ModManager.CachingModsMessage>Attendere, la modlist è in fase di caricamento</Fluffy.ModManager.CachingModsMessage>
 </LanguageData>

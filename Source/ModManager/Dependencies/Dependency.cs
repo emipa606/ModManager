@@ -149,7 +149,8 @@ public abstract class Dependency : ModDependency
 #else
             if (Prefs.DevMode)
             {
-                Log.Warning($"Failed to parse dependency: {node.OuterXml}.\nInner exception: {ex}");
+                Log.Warning(
+                    $"Failed to parse dependency: {node.OuterXml}.\nInner exception: {ex}");
             }
 #endif
         }

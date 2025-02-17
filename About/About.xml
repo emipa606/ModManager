@@ -30,6 +30,7 @@ Update of Fluffys mod https://steamcommunity.com/sharedfiles/filedetails/?id=150
 [*] Mods can now be tagged as translations when publishing
 [*] Mods already tagged as translation will have the translation-checkbox pre-filled
 [*] Added a dialog to set a custom changenote when publishing an update of a mod
+[*] Added selectable background color
 [/list]
 
 [img]https://i.imgur.com/pufA0kM.png[/img]
@@ -149,5 +150,5 @@ Parts of this mod were created by, or derived from works created by;
 [/list] 
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3306654341][img]https://img.shields.io/github/v/release/emipa606/ModManager?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags: mod management,  local copies,  load order</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.4</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.5</modVersion>
 </ModMetaData>

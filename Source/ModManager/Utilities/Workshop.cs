@@ -23,7 +23,8 @@ public static class Workshop
         if (force)
         {
             mod.enabled = false;
-            AccessTools.Method(typeof(Verse.Steam.Workshop), "Unsubscribe").Invoke(null, [mod]);
+            AccessTools.Method(typeof(Verse.Steam.Workshop), "Unsubscribe", [typeof(PublishedFileId_t)])
+                .Invoke(null, [mod.GetPublishedFileId()]);
             return;
         }
 

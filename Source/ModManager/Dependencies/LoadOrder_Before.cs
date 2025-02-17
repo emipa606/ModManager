@@ -44,6 +44,11 @@ public class LoadOrder_Before(Manifest parent, string packageId) : LoadOrder(par
 
     protected override bool CheckSatisfied()
     {
+        if (!Target.Active)
+        {
+            return true;
+        }
+
         var mods = ModButtonManager.ActiveMods;
         return Target is { Active: true } && parent.Mod.Active && mods.IndexOf(Target) > mods.IndexOf(parent.Mod);
     }
