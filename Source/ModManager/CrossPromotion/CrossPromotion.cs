@@ -65,7 +65,7 @@ public class CrossPromotion
         }
         catch (Exception ex)
         {
-            Log.Error(ex.ToString());
+            Log.Warning(ex.ToString());
             Preview = null;
         }
     }

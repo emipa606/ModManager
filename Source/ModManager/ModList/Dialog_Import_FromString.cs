@@ -33,7 +33,7 @@ public class Dialog_Import_FromString : Dialog_ImExport_String
     {
         try
         {
-            ModList = ModList.FromYaml(Content);
+            ModList = ModList.FromXml(Content);
         }
         catch
         {

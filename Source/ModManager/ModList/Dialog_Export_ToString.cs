@@ -6,7 +6,7 @@ namespace ModManager;
 
 public class Dialog_Export_ToString(ModList modlist) : Dialog_ImExport_String
 {
-    private readonly string _content = modlist.ToYaml();
+    private readonly string _content = modlist.ToXml();
 
     protected override ModList ModList => modlist;
 

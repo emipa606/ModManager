@@ -214,6 +214,23 @@ public class ModList : IExposable, IRenameable
         return list;
     }
 
+    public static ModList FromXml(string source)
+    {
+        try
+        {
+            var tempFile = Path.GetTempFileName();
+            File.AppendAllText(tempFile, source);
+            var modList = FromFile(tempFile);
+            File.Delete(tempFile);
+            return modList;
+        }
+        catch (Exception)
+        {
+            ModListManager.Notify_ModListsChanged();
+            throw;
+        }
+    }
+
     public static ModList FromYaml(string source)
     {
         try
@@ -346,6 +363,36 @@ public class ModList : IExposable, IRenameable
         var yaml = serializer.Serialize(this);
         return yaml;
     }
+
+    public string ToXml()
+    {
+        var originalName = Name;
+
+        try
+        {
+            var tempFile = Path.GetTempFileName();
+            Name = Path.GetFileNameWithoutExtension(tempFile);
+            Scribe.saver.InitSaving(tempFile, ModListManager.RootElement);
+            ExposeData();
+            Scribe.saver.FinalizeSaving();
+            if (!ModListManager.ModLists.Contains(this))
+            {
+                ModListManager.Notify_ModListsChanged();
+            }
+
+            var returnValue = File.ReadAllText(tempFile);
+            File.Delete(tempFile);
+            File.Delete(ModListManager.FilePath(this));
+            Name = originalName;
+            return returnValue;
+        }
+        catch (Exception)
+        {
+            ModListManager.Notify_ModListsChanged();
+            throw;
+        }
+    }
+
 
     public void Add(ModMetaData mod)
     {

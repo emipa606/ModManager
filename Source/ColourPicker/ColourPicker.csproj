@@ -9,7 +9,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.5.5</FileVersion>
+    <FileVersion>1.5.6</FileVersion>
     <Copyright>Copyright © 2015-2021</Copyright>
   </PropertyGroup>
   <ItemGroup>

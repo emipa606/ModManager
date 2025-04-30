@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="FluffyUI/FluffyUI.csproj" />
+  <Project Path="ModManager/ModManager.csproj" />
+</Solution>
