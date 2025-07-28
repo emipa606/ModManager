@@ -1,5 +1,9 @@
 # Changelog for ModManager
 
+1.6.0 - Mod updated for 1.6 and passed autotests
+Used DeepL to update translations for ChineseSimplified, French, German, Italian, Russian, Turkish
+
+
 1.5.6 - Changed mod-list string generation from Yaml to XML, same as the actual modlist-files
 
 

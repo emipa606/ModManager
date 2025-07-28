@@ -6,15 +6,15 @@ namespace FluffyUI;
 public struct FailReason
 {
     public readonly string Reason;
-    public readonly bool Success;
+    private readonly bool Success;
 
-    public FailReason(string reason)
+    private FailReason(string reason)
     {
         Success = false;
         Reason = reason;
     }
 
-    public FailReason(bool success)
+    private FailReason(bool success)
     {
         Success = success;
         Reason = string.Empty;

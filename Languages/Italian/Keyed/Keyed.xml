@@ -178,4 +178,8 @@
   <Fluffy.ModManager.ResetLabel>Ripristino di tutte le impostazioni</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Colore di sfondo</Fluffy.ModManager.BackgroundColor>
   <Fluffy.ModManager.CachingModsMessage>Attendere, la modlist è in fase di caricamento</Fluffy.ModManager.CachingModsMessage>
+  <!-- DEPRECATED: Terminology was changed to be more consistent -->
+  <!-- End deprecated -->
+  <!-- Start replacement strings for import/export -->
+  <!-- End replacement strings -->
 </LanguageData>

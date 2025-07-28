@@ -12,7 +12,7 @@ namespace ModManager;
 
 public abstract class ModButton
 {
-    internal static readonly Dictionary<string, string> _modNameTruncationCache = new Dictionary<string, string>();
+    internal static readonly Dictionary<string, string> _modNameTruncationCache = new();
     private ModButton _focus;
 
     private List<Dependency> _relevantIssues;
@@ -45,10 +45,10 @@ public abstract class ModButton
     public abstract IEnumerable<Dependency> Requirements { get; }
     protected virtual int SeverityThreshold => 2;
 
-    protected List<Dependency> RelevantIssues =>
+    private List<Dependency> RelevantIssues =>
         _relevantIssues ??= Requirements.Where(i => i.Severity >= SeverityThreshold).ToList();
 
-    protected string RelevantIssuesString => _relevantIssuesString ??= RelevantIssues.OrderBy(i => i.Severity)
+    private string RelevantIssuesString => _relevantIssuesString ??= RelevantIssues.OrderBy(i => i.Severity)
         .Select(i => i.Tooltip.Colorize(i.Color))
         .StringJoin("\n");
 

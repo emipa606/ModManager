@@ -15,7 +15,7 @@ namespace ModManager;
 public class ModList : IExposable, IRenameable
 {
     // TODO: figure out if/how we can ignore unknown fields in the deserializer
-    public static readonly IDeserializer Deserializer = new DeserializerBuilder().Build();
+    private static readonly IDeserializer Deserializer = new DeserializerBuilder().Build();
     private Color _color = Color.white;
     private List<string> _modIds = [];
     private List<string> _modNames = [];
@@ -23,7 +23,7 @@ public class ModList : IExposable, IRenameable
     private string _name;
 
     [Obsolete("This constructor should not be used directly.")]
-    public ModList()
+    private ModList()
     {
         // scribe
         Version = 1;
@@ -56,7 +56,7 @@ public class ModList : IExposable, IRenameable
     public string Name
     {
         get => _name;
-        set
+        private set
         {
             // _oldName is only cleared upon the _end_ of the task, to prevent callbacks setting _oldName to the new _name.
             var oldName = _name;
@@ -176,12 +176,9 @@ public class ModList : IExposable, IRenameable
             throw new InvalidDataException("ids and names unbalanced.");
         }
 
-        if (list._modIds.Count != list._modSteamWorkshopIds.Count)
-        {
-            throw new InvalidDataException("ids and steam workshop ids unbalanced.");
-        }
-
-        return list;
+        return list._modIds.Count != list._modSteamWorkshopIds.Count
+            ? throw new InvalidDataException("ids and steam workshop ids unbalanced.")
+            : list;
     }
 
     public static ModList FromSave(string name, string path)

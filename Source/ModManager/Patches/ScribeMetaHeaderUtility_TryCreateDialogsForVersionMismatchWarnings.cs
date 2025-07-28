@@ -44,10 +44,7 @@ public class ScribeMetaHeaderUtility_TryCreateDialogsForVersionMismatchWarnings
             string modsMismatchMessage = "We're terribly sorry this message is so useless" +
                                          "ModsMismatchWarningText".Translate(loadedMods, activeMods);
             message = message == null ? modsMismatchMessage : $"{message}\n\n{modsMismatchMessage}";
-            if (title == null)
-            {
-                title = "ModsMismatchWarningTitle".Translate();
-            }
+            title ??= "ModsMismatchWarningTitle".Translate();
         }
 
         if (message == null)

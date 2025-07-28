@@ -13,7 +13,7 @@ namespace ModManager;
 public static class Extensions
 {
     private static readonly Dictionary<ModMetaData, Mod>
-        _modClassWithSettingsCache = new Dictionary<ModMetaData, Mod>();
+        _modClassWithSettingsCache = new();
 
     public static string SanitizeYaml(this string msg)
     {
@@ -48,7 +48,7 @@ public static class Extensions
         return mod.SettingsCategory() != null;
     }
 
-    public static string SettingsCategory(this ModMetaData mod)
+    private static string SettingsCategory(this ModMetaData mod)
     {
         return mod.ModClassWithSettings()?.SettingsCategory();
     }

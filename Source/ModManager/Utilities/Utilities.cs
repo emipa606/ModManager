@@ -15,13 +15,13 @@ namespace ModManager;
 
 public class Utilities
 {
-    private static readonly Regex authorTag = new Regex(@"^\[[A-Z]{1,3}\]", RegexOptions.IgnoreCase);
+    private static readonly Regex authorTag = new(@"^\[[A-Z]{1,3}\]", RegexOptions.IgnoreCase);
 
     private static readonly Regex
-        versionTag = new Regex(@"(\[|\()(\d\.\d+|[A-B]\d{2})(\]|\))", RegexOptions.IgnoreCase);
+        versionTag = new(@"(\[|\()(\d\.\d+|[A-B]\d{2})(\]|\))", RegexOptions.IgnoreCase);
 
     private static readonly Regex versionString =
-        new Regex(@"(\[|\()?v?\d+(\.\d+)+|[A-B]\d{2}(\]|\))?", RegexOptions.IgnoreCase);
+        new(@"(\[|\()?v?\d+(\.\d+)+|[A-B]\d{2}(\]|\))?", RegexOptions.IgnoreCase);
 
     public static List<FloatMenuOption> NewOptionsList => [];
 
@@ -73,17 +73,11 @@ public class Utilities
                 rect.y = canvas.yMin;
                 break;
             case Direction8Way.North:
-                break;
             case Direction8Way.East:
-                break;
             case Direction8Way.SouthEast:
-                break;
             case Direction8Way.South:
-                break;
             case Direction8Way.SouthWest:
-                break;
             case Direction8Way.West:
-                break;
             case Direction8Way.Invalid:
                 break;
             default:

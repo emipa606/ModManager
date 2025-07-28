@@ -21,14 +21,14 @@ public sealed class ModButton_Missing(string id, string name, ulong steamWorksho
         get => true;
         set
         {
-            if (value == false)
+            if (!value)
             {
                 ModButtonManager.TryRemove(this);
             }
         }
     }
 
-    public Color Color => Color.gray;
+    private Color Color => Color.gray;
 
     public override IEnumerable<Dependency> Requirements => Manifest.EmptyRequirementList;
 

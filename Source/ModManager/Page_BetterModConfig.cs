@@ -17,14 +17,6 @@ namespace ModManager;
 
 public class Page_BetterModConfig : Page_ModsConfig
 {
-    public enum FocusArea
-    {
-        AvailableFilter,
-        Available,
-        ActiveFilter,
-        Active
-    }
-
     private string _activeFilter;
     private bool _activeFilterVisible = true;
     private int _activeModsHash;
@@ -61,14 +53,14 @@ public class Page_BetterModConfig : Page_ModsConfig
             .SetValue(this, new WindowResizer { minWindowSize = MinimumSize });
     }
 
-    public bool FilterAvailable => !_availableFilterVisible && !_availableFilter.NullOrEmpty();
-    public bool FilterActive => !_activeFilterVisible && !_activeFilter.NullOrEmpty();
+    private bool FilterAvailable => !_availableFilterVisible && !_availableFilter.NullOrEmpty();
+    private bool FilterActive => !_activeFilterVisible && !_activeFilter.NullOrEmpty();
 
-    public static Page_BetterModConfig Instance { get; protected set; }
+    public static Page_BetterModConfig Instance { get; private set; }
 
     public override Vector2 InitialSize => StandardSize;
 
-    public static Vector2 MinimumSize => StandardSize * 2 / 3f;
+    private static Vector2 MinimumSize => StandardSize * 2 / 3f;
 
     public ModButton Selected
     {
@@ -124,7 +116,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         _focusArea == FocusArea.Active && ModButtonManager.ActiveButtons.Contains(Selected) ||
         _focusArea == FocusArea.Available && ModButtonManager.AvailableButtons.Contains(Selected);
 
-    public List<ModButton> FilteredAvailableButtons
+    private List<ModButton> FilteredAvailableButtons
     {
         get
         {
@@ -140,7 +132,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         }
     }
 
-    public List<ModButton> FilteredActiveButtons => ModButtonManager.ActiveButtons
+    private List<ModButton> FilteredActiveButtons => ModButtonManager.ActiveButtons
         .Where(b => !FilterActive || b.MatchesFilter(_activeFilter) > 0)
         .ToList();
 
@@ -432,7 +424,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         Utilities.FloatMenu(options);
     }
 
-    public void HandleKeyboardNavigation()
+    private void HandleKeyboardNavigation()
     {
         // note that this depends on pop-over windows setting absorbInputAroundWindow
         if (!Find.WindowStack.CurrentWindowGetsInput)
@@ -457,7 +449,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         // unity tries to select the next textField on Tab (which is _not_ documented!)
         if (_focusArea.ToString() != GUI.GetNameOfFocusedControl())
         {
-            if (_focusArea == FocusArea.ActiveFilter || _focusArea == FocusArea.AvailableFilter)
+            if (_focusArea is FocusArea.ActiveFilter or FocusArea.AvailableFilter)
             {
                 // focus the control we want.
                 GUI.FocusControl(_focusArea.ToString());
@@ -766,7 +758,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         }
     }
 
-    public void DoAvailableMods(Rect canvas)
+    private void DoAvailableMods(Rect canvas)
     {
         Utilities.DoLabel(ref canvas, I18n.AvailableMods);
         Widgets.DrawBoxSolid(canvas, SlightlyDarkBackground);
@@ -838,7 +830,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         GUI.color = Color.white;
     }
 
-    public void DoActiveMods(Rect canvas)
+    private void DoActiveMods(Rect canvas)
     {
         Utilities.DoLabel(ref canvas, I18n.ActiveMods);
         Widgets.DrawBoxSolid(canvas, SlightlyDarkBackground);
@@ -924,7 +916,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         Widgets.EndScrollView();
     }
 
-    public void DoDetails(Rect canvas)
+    private void DoDetails(Rect canvas)
     {
         if (Selected == null)
         {
@@ -940,7 +932,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         }
     }
 
-    public void DoFilterField(Rect canvas, ref string filter, ref bool visible, FocusArea focus)
+    private void DoFilterField(Rect canvas, ref string filter, ref bool visible, FocusArea focus)
     {
         var rect = canvas.ContractedBy(SmallMargin / 2f);
         var iconRect = new Rect(
@@ -1098,7 +1090,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         CheckModListChanged();
     }
 
-    public void ConfirmModIssues()
+    private void ConfirmModIssues()
     {
         var issues = ModButtonManager.Issues.Where(i => i.Severity > 1);
         var issueList = "";
@@ -1129,7 +1121,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         }
     }
 
-    public void CheckModListChanged()
+    private void CheckModListChanged()
     {
         if (_activeModsHash == ModLister.InstalledModsListHash(true))
         {
@@ -1153,5 +1145,13 @@ public class Page_BetterModConfig : Page_ModsConfig
         {
             GenCommandLine.Restart();
         }
+    }
+
+    private enum FocusArea
+    {
+        AvailableFilter,
+        Available,
+        ActiveFilter,
+        Active
     }
 }

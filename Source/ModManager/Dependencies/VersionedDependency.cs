@@ -13,8 +13,8 @@ namespace ModManager;
 
 public class VersionedDependency : Dependency
 {
-    protected static readonly Regex SteamIdRegex = new Regex(@"(\d*)$");
-    private Range _range = new Range(">= 0.0.0");
+    private static readonly Regex SteamIdRegex = new(@"(\d*)$");
+    private Range _range = new(">= 0.0.0");
     protected bool versioned;
 
     public VersionedDependency() : base(null, string.Empty)
@@ -32,7 +32,7 @@ public class VersionedDependency : Dependency
     public Range Range
     {
         get => _range;
-        set
+        private set
         {
             versioned = true;
             _range = value;
@@ -133,7 +133,7 @@ public class VersionedDependency : Dependency
         }
     }
 
-    public bool IsAvailable => Target != null;
+    private bool IsAvailable => Target != null;
     protected bool IsActive => Target?.GetManifest().Button.Active ?? false;
     public override bool IsApplicable => parent?.Mod?.Active ?? false;
 

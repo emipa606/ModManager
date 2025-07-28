@@ -44,16 +44,16 @@ public class TextureChooser
         _curIndex = defaultIndex;
     }
 
-    public Texture2D Choice => options[_curIndex];
+    private Texture2D Choice => options[_curIndex];
 
     public void DrawAt(Rect canvas, float margin = DefaultMargin,
         bool highlight = true)
     {
         // create main icon rect
         var grid = new Grid(canvas, 5, gutters: Vector2.zero);
-        var backCell = grid.Column(1).Rect;
+        var backCell = grid.Column().Rect;
         var iconCell = grid.Column(3).Rect;
-        var nectCell = grid.Column(1).Rect;
+        var nectCell = grid.Column().Rect;
 
         var buttonSize = Mathf.Min(backCell.width, backCell.height * 2 / 3f);
         var buttonRect = new Rect(0f, 0f, buttonSize, buttonSize);

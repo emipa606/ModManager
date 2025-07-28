@@ -69,10 +69,10 @@ public static class ModButtonManager
     public static IEnumerable<ModMetaData> AvailableMods => AllMods.Where(m => !m.Active);
     public static bool AnyIssue => Issues.Any(i => i.Severity > 1);
 
-    public static ModButton_Installed CoreMod => AllButtons.First(b => b.IsCoreMod) as ModButton_Installed;
-    public static ModButton_Installed ModManagerMod => AllButtons.First(b => b.IsModManager) as ModButton_Installed;
+    private static ModButton_Installed CoreMod => AllButtons.First(b => b.IsCoreMod) as ModButton_Installed;
+    private static ModButton_Installed ModManagerMod => AllButtons.First(b => b.IsModManager) as ModButton_Installed;
 
-    public static IEnumerable<ModButton_Installed> Expansions =>
+    private static IEnumerable<ModButton_Installed> Expansions =>
         AllButtons.Where(b => b.IsExpansion).Cast<ModButton_Installed>();
 
     public static List<Dependency> Issues
@@ -186,7 +186,7 @@ public static class ModButtonManager
         Notify_RecacheAllModButtons();
     }
 
-    public static void RecacheIssues()
+    private static void RecacheIssues()
     {
         _issues = ActiveButtons.SelectMany(b => b.Requirements).ToList();
     }
@@ -288,7 +288,7 @@ public static class ModButtonManager
         // Page_BetterModConfig.Instance.Notify_ModsListChanged();
     }
 
-    public static void Notify_RecacheIssuesList()
+    private static void Notify_RecacheIssuesList()
     {
         _issues = null;
     }

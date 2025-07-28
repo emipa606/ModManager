@@ -15,14 +15,13 @@ public class ModListManager
 {
     public const string RootElement = "ModList";
 
-    private static readonly Dictionary<ModMetaData, List<ModList>> _modListsCache =
-        new Dictionary<ModMetaData, List<ModList>>();
+    private static readonly Dictionary<ModMetaData, List<ModList>> _modListsCache = new();
 
     private static readonly List<ModList> _emptyModList = [];
 
     private static List<ModList> _modLists;
 
-    public static string BasePath
+    private static string BasePath
     {
         get
         {
@@ -68,7 +67,7 @@ public class ModListManager
         return ListsFor(button?.Selected);
     }
 
-    public static List<ModList> ListsFor(ModMetaData mod)
+    private static List<ModList> ListsFor(ModMetaData mod)
     {
         // garbage in, garbage out.
         if (mod == null)
@@ -137,7 +136,7 @@ public class ModListManager
         return FilePath(list.Name);
     }
 
-    public static string FilePath(string name)
+    private static string FilePath(string name)
     {
         return Path.Combine(BasePath, $"{name}.xml");
     }

@@ -3,11 +3,17 @@
   "CanAdd": "0",
   "CanRemove": "0",
   "SocialImageSet": true,
-  "PreviewVersion": "1.5",
+  "PreviewVersion": "1.6",
   "SearchTags": [
     "mod management",
     " local copies",
     " load order"
   ],
-  "LastXmlCleaning": "2025-04-30T20:42:59.1059533+02:00"
+  "LastXmlCleaning": "2025-07-28T20:13:01.3117647+02:00",
+  "Patches": false,
+  "Defs": false,
+  "Assemblies": true,
+  "LinesOfCode": 278655,
+  "LinesOfXML": 0,
+  "CodeBaseSize": 86
 }

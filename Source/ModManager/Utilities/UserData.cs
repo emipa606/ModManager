@@ -11,15 +11,13 @@ namespace ModManager;
 
 public class UserData
 {
-    public const string UserDataFolder = "ModManager_UserData";
-    public const string ModsFolder = "Mods";
-    public const string ButtonFolder = "Buttons";
+    private const string UserDataFolder = "ModManager_UserData";
+    private const string ModsFolder = "Mods";
+    private const string ButtonFolder = "Buttons";
 
-    public static readonly Dictionary<ModMetaData, ModAttributes> ModAttributes =
-        new Dictionary<ModMetaData, ModAttributes>();
+    private static readonly Dictionary<ModMetaData, ModAttributes> ModAttributes = new();
 
-    public static readonly Dictionary<ModButton, ButtonAttributes> ButtonAttributes =
-        new Dictionary<ModButton, ButtonAttributes>();
+    private static readonly Dictionary<ModButton, ButtonAttributes> ButtonAttributes = new();
 
     public ModAttributes this[ModMetaData mod]
     {
@@ -100,7 +98,7 @@ public class UserData
         Scribe.saver.FinalizeSaving();
     }
 
-    public T Read<T>(string path) where T : IUserData
+    private T Read<T>(string path) where T : IUserData
     {
         Scribe.loader.InitLoading(path);
         Scribe.loader.EnterNode("UserData");

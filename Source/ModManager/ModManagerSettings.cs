@@ -9,7 +9,7 @@ public class ModManagerSettings : ModSettings
     public bool AddExpansionsToNewModLists = true;
     public bool AddHugsLibToNewModLists;
     public bool AddModManagerToNewModLists = true;
-    public Color BackgroundColor = new Color(0f, 0f, 0f, 0.1f);
+    public Color BackgroundColor = new(0f, 0f, 0f, 0.1f);
 
     public bool ShowPromotions = true;
     public bool ShowPromotions_NotActive;
@@ -18,7 +18,7 @@ public class ModManagerSettings : ModSettings
     public bool ShowVersionChecksOnSteamMods;
     public bool SkipPublishingCountdown;
 
-    public bool SurveyNotificationShown;
+    private bool SurveyNotificationShown;
     public bool TrimTags = true;
     public bool TrimVersionStrings;
     public bool UseTempFolderForCrossPromotions;
@@ -66,7 +66,7 @@ public class ModManagerSettings : ModSettings
         listing.CheckboxLabeled(I18n.ShowPromotions_NotSubscribed, ref ShowPromotions_NotSubscribed);
         listing.CheckboxLabeled(I18n.ShowPromotions_NotActive, ref ShowPromotions_NotActive);
         var before = UseTempFolderForCrossPromotions;
-        if (CrossPromotionManager.cachePathOverriden)
+        if (CrossPromotionManager.CachePathOverriden)
         {
             GUI.color = Color.grey;
         }

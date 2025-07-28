@@ -179,4 +179,8 @@
   <Fluffy.ModManager.ResetLabel>重置所有设置</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>背景颜色</Fluffy.ModManager.BackgroundColor>
   <Fluffy.ModManager.CachingModsMessage>等待，正在加载修改列表</Fluffy.ModManager.CachingModsMessage>
+  <!-- DEPRECATED: Terminology was changed to be more consistent -->
+  <!-- End deprecated -->
+  <!-- Start replacement strings for import/export -->
+  <!-- End replacement strings -->
 </LanguageData>

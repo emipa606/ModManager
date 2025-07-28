@@ -25,7 +25,7 @@ public sealed class ModButton_Installed : ModButton
 
     private List<FloatMenuOption> _titleLinkOptions;
 
-    public ModButton_Installed(ModMetaData mod)
+    private ModButton_Installed(ModMetaData mod)
     {
         if (mod == null)
         {
@@ -46,11 +46,11 @@ public sealed class ModButton_Installed : ModButton
     }
 
     public override int SortOrder => Selected.Compatibility();
-    public List<ModList> Lists => ModListManager.ListsFor(this);
+    private List<ModList> Lists => ModListManager.ListsFor(this);
 
     public override int LoadOrder => Selected?.LoadOrder() ?? base.LoadOrder;
 
-    public IEnumerable<ModMetaData> VersionsOrdered => Versions
+    private IEnumerable<ModMetaData> VersionsOrdered => Versions
         .OrderByDescending(mod => mod.Compatibility())
         .ThenBy(mod => mod.Source);
 
@@ -75,14 +75,11 @@ public sealed class ModButton_Installed : ModButton
     {
         get
         {
-            if (_selected == null)
-            {
-                _selected = Versions.FirstOrDefault(m => m.Active) ?? VersionsOrdered.FirstOrDefault();
-            }
+            _selected ??= Versions.FirstOrDefault(m => m.Active) ?? VersionsOrdered.FirstOrDefault();
 
             return _selected;
         }
-        set
+        private set
         {
             if (value != null)
             {
@@ -286,12 +283,12 @@ public sealed class ModButton_Installed : ModButton
         }
     }
 
-    public string GetVersionTip(ModMetaData mod)
+    private string GetVersionTip(ModMetaData mod)
     {
         return mod.VersionCompatible ? I18n.CurrentVersion : I18n.DifferentVersion(mod);
     }
 
-    internal void DoSourceButtons(Rect canvas)
+    private void DoSourceButtons(Rect canvas)
     {
         var iconRect = new Rect(
             canvas.xMax - SmallIconSize,
@@ -407,7 +404,7 @@ public sealed class ModButton_Installed : ModButton
         }
     }
 
-    public void DoModActionFloatMenu()
+    private void DoModActionFloatMenu()
     {
         var options = NewOptionsList;
         if (ModListManager.ListsFor(this).Count < ModListManager.ModLists.Count)
@@ -563,8 +560,6 @@ public sealed class ModButton_Installed : ModButton
             {
                 ContentSource.ModsFolder => mod.UserData()?.Source,
                 ContentSource.SteamWorkshop => mod,
-                ContentSource.Undefined => null,
-                ContentSource.OfficialModsFolder => null,
                 _ => null
             };
             if (steamMod != null && SteamManager.Initialized)

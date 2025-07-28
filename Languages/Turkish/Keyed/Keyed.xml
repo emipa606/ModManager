@@ -182,4 +182,9 @@
   <Fluffy.ModManager.ResetLabel>Tüm ayarları sıfırla</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>Arka plan rengi</Fluffy.ModManager.BackgroundColor>
   <Fluffy.ModManager.CachingModsMessage>Bekle, mod listesi yükleniyor</Fluffy.ModManager.CachingModsMessage>
+  <!-- cancel button on confirmation(s) -->
+  <!-- DEPRECATED: Terminology was changed to be more consistent -->
+  <!-- End deprecated -->
+  <!-- Start replacement strings for import/export -->
+  <!-- End replacement strings -->
 </LanguageData>

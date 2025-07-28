@@ -14,7 +14,7 @@ namespace ModManager;
 public static class DraggingManager
 {
     public static ModButton Dragged;
-    public static bool Dropped;
+    private static bool Dropped;
     public static bool Dragging => Dragged != null;
 
     public static void Update()

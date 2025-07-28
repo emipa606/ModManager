@@ -133,7 +133,7 @@ public class VersionCheck : Dependency
 
     public override string RequirementTypeLabel => "VersionCheck".Translate();
 
-    public async void FetchManifest(string manifestUri)
+    private async void FetchManifest(string manifestUri)
     {
         var client = new WebClient();
         try

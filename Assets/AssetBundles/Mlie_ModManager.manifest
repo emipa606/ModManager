@@ -1,0 +1,40 @@
+ManifestFileVersion: 0
+CRC: 1129774506
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 94d2149beb6a2d77bc9ae507ab5642ea
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2612ac43db082a73502ee80f2eceb73f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 94d2149beb6a2d77bc9ae507ab5642ea
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Status/Down.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (6).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (1).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Status/Up.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/EyeClosed.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Status/Plus.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (4).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Gear.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/File.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (2).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/EyeOpen.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Palette.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Wand.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Status/Cross.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Ludeon.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Warning.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Close.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (3).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Search.png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Spinner/frame (5).png
+- Assets/Data/Mlie.ModManager/Textures/UI/Icons/Question.png
+Dependencies: []

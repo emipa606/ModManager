@@ -32,7 +32,7 @@ public static class Workshop
             delegate { Unsubscribe(mod, true); }, true));
     }
 
-    public static void Unsubscribe(IEnumerable<ModMetaData> mods)
+    private static void Unsubscribe(IEnumerable<ModMetaData> mods)
     {
         var modList = mods
             .Select(m => $"{m.Name} ({m.SupportedVersionsReadOnly.Select(v => v.ToString()).StringJoin(", ")})")

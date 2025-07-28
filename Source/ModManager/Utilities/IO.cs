@@ -17,34 +17,34 @@ namespace ModManager;
 
 public static class IO
 {
-    public const string LocalCopyPostfix = "_copy";
+    private const string LocalCopyPostfix = "_copy";
 
     private static readonly Regex _postfixRegex =
-        new Regex($@"(?:{ModMetaData.SteamModPostfix}|{LocalCopyPostfix}(?:_\d+)?)$");
+        new($@"(?:{ModMetaData.SteamModPostfix}|{LocalCopyPostfix}(?:_\d+)?)$");
 
     private static readonly List<Pair<ModButton_Installed, ModMetaData>> _batchCreatedCopies =
         [];
 
-    private static readonly Dictionary<string, string> _hashCache = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> _hashCache = new();
 
 
-    public static readonly char[] invalidChars =
+    private static readonly char[] invalidChars =
         Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).ToArray();
 
-    public static readonly Regex invalidFileNameCharsRegex =
-        new Regex($"[{Regex.Escape(new string(invalidChars))}]",
+    private static readonly Regex invalidFileNameCharsRegex =
+        new($"[{Regex.Escape(new string(invalidChars))}]",
             RegexOptions.Compiled & RegexOptions.CultureInvariant);
 
-    public static readonly string[] reservedWords =
+    private static readonly string[] reservedWords =
     [
         "CON", "PRN", "AUX", "CLOCK$", "NUL", "COM0", "COM1", "COM2", "COM3", "COM4",
         "COM5", "COM6", "COM7", "COM8", "COM9", "LPT0", "LPT1", "LPT2", "LPT3", "LPT4",
         "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
     ];
 
-    public static string DateStamp => $"-{DateTime.Now.Day}-{DateTime.Now.Month}";
+    private static string DateStamp => $"-{DateTime.Now.Day}-{DateTime.Now.Month}";
     public static string LocalCopyPrefix => "__LocalCopy";
-    public static string ModsDir => GenFilePaths.ModsFolderPath;
+    private static string ModsDir => GenFilePaths.ModsFolderPath;
 
 
     private static void Copy(this DirectoryInfo source, string destination, bool recursive)
@@ -151,12 +151,11 @@ public static class IO
             I18n.ConfirmRemoveLocal(mod.Name), () => DeleteLocal(mod, true), true));
     }
 
-    internal static void DeleteLocalCopies(IEnumerable<ModMetaData> mods)
+    private static void DeleteLocalCopies(IEnumerable<ModMetaData> mods)
     {
         var modList = mods
-            .Select(
-                m =>
-                    $"{m.Name} ({m.SupportedVersionsReadOnly.Select(v => v.ToString()).StringJoin(", ")})")
+            .Select(m =>
+                $"{m.Name} ({m.SupportedVersionsReadOnly.Select(v => v.ToString()).StringJoin(", ")})")
             .ToLineList();
         var dialog = Dialog_MessageBox.CreateConfirmation(
             I18n.MassUnSubscribeConfirm(mods.Count(), modList),
@@ -171,7 +170,7 @@ public static class IO
         Find.WindowStack.Add(dialog);
     }
 
-    internal static void FinishBatchCreate()
+    private static void FinishBatchCreate()
     {
         LongEventHandler.QueueLongEvent(() =>
         {
@@ -200,7 +199,7 @@ public static class IO
         foreach (var file in files)
         {
             // hash path
-            var pathBytes = Encoding.UTF8.GetBytes(file.FullName.Substring(folder.FullName.Length));
+            var pathBytes = Encoding.UTF8.GetBytes(file.FullName[folder.FullName.Length..]);
             md5.TransformBlock(pathBytes, 0, pathBytes.Length, pathBytes, 0);
 
             // hash contents
@@ -217,7 +216,7 @@ public static class IO
         return hash;
     }
 
-    public static string GetLocalCopyFolder(this ModMetaData mod)
+    private static string GetLocalCopyFolder(this ModMetaData mod)
     {
         return Path.Combine(ModsDir, $"{LocalCopyPrefix}_{mod.Name}_{DateStamp}".SanitizeFileName());
     }
@@ -418,7 +417,7 @@ public static class IO
         }
     }
 
-    public static bool TryCreateLocalCopy(ModMetaData mod, out ModMetaData copy)
+    private static bool TryCreateLocalCopy(ModMetaData mod, out ModMetaData copy)
     {
         if (mod.Source != ContentSource.SteamWorkshop)
         {
@@ -438,7 +437,7 @@ public static class IO
         return TryCopyMod(mod, out copy, targetDir);
     }
 
-    public static bool TryRemoveLocalCopy(ModMetaData mod)
+    private static bool TryRemoveLocalCopy(ModMetaData mod)
     {
         if (mod.Source != ContentSource.ModsFolder)
         {

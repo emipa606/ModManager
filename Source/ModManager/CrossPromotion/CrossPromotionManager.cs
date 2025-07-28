@@ -16,27 +16,25 @@ namespace ModManager;
 
 public static class CrossPromotionManager
 {
-    private static AppId_t _appId = AppId_t.Invalid;
+    private static AppId_t appId = AppId_t.Invalid;
 
-    private static readonly Dictionary<PublishedFileId_t, AccountID_t> _authorForMod =
-        new Dictionary<PublishedFileId_t, AccountID_t>();
+    private static readonly Dictionary<PublishedFileId_t, AccountID_t> authorForMod = new();
 
-    public static int? _cacheCount;
+    private static int? cacheCount;
 
 
-    private static string _cachePath;
+    private static string cachePath;
 
-    public static long? _cacheSize;
-    private static readonly HashSet<PublishedFileId_t> _currentlyFetchingFiles = [];
-    private static readonly bool _enabled;
-    private static readonly CallResult<SteamUGCQueryCompleted_t> _modDetailsCallResult;
+    private static long? cacheSize;
+    private static readonly HashSet<PublishedFileId_t> currentlyFetchingFiles = [];
+    private static readonly bool enabled;
+    private static readonly CallResult<SteamUGCQueryCompleted_t> modDetailsCallResult;
 
-    private static readonly Dictionary<AccountID_t, List<CrossPromotion>> _modsForAuthor =
-        new Dictionary<AccountID_t, List<CrossPromotion>>();
+    private static readonly Dictionary<AccountID_t, List<CrossPromotion>> modsForAuthor = new();
 
-    private static Vector2 _scrollPosition = Vector2.zero;
-    private static readonly CallResult<SteamUGCQueryCompleted_t> _userModsCallResult;
-    internal static bool cachePathOverriden;
+    private static Vector2 scrollPosition = Vector2.zero;
+    private static readonly CallResult<SteamUGCQueryCompleted_t> userModsCallResult;
+    internal static bool CachePathOverriden;
 
     static CrossPromotionManager()
     {
@@ -45,33 +43,33 @@ public static class CrossPromotionManager
             return;
         }
 
-        _enabled = true;
-        _userModsCallResult = CallResult<SteamUGCQueryCompleted_t>.Create(OnUserModsReceived);
-        _modDetailsCallResult = CallResult<SteamUGCQueryCompleted_t>.Create(OnModDetailsReceived);
+        enabled = true;
+        userModsCallResult = CallResult<SteamUGCQueryCompleted_t>.Create(OnUserModsReceived);
+        modDetailsCallResult = CallResult<SteamUGCQueryCompleted_t>.Create(OnModDetailsReceived);
     }
 
-    public static AppId_t AppID
+    private static AppId_t AppID
     {
         get
         {
-            if (_enabled && _appId == AppId_t.Invalid)
+            if (enabled && appId == AppId_t.Invalid)
             {
-                _appId = SteamUtils.GetAppID();
+                appId = SteamUtils.GetAppID();
             }
 
-            return _appId;
+            return appId;
         }
     }
 
-    public static int CacheCount => _cacheCount ??= new DirectoryInfo(CachePath).GetFiles().Length;
+    public static int CacheCount => cacheCount ??= new DirectoryInfo(CachePath).GetFiles().Length;
 
     internal static string CachePath
     {
         get
         {
-            if (_cachePath != null)
+            if (cachePath != null)
             {
-                return _cachePath;
+                return cachePath;
             }
 
             if (GenCommandLine.TryGetCommandLineArg("cross-promotions-path", out var path))
@@ -82,7 +80,7 @@ public static class CrossPromotionManager
                     path = Path.DirectorySeparatorChar.ToString();
                 }
 
-                cachePathOverriden = true;
+                CachePathOverriden = true;
                 Log.Message($"CrossPromotion preview images location overriden: {path}");
             }
             else
@@ -102,20 +100,20 @@ public static class CrossPromotionManager
         }
     }
 
-    public static long CacheSize => _cacheSize ??= new DirectoryInfo(CachePath).GetFiles().Sum(f => f.Length);
+    public static long CacheSize => cacheSize ??= new DirectoryInfo(CachePath).GetFiles().Sum(f => f.Length);
 
     private static List<CrossPromotion> RelevantPromotions { get; set; }
 
-    public static AccountID_t? AuthorForMod(PublishedFileId_t fileId)
+    private static AccountID_t? AuthorForMod(PublishedFileId_t fileId)
     {
-        if (_authorForMod.TryGetValue(fileId, out var author))
+        if (authorForMod.TryGetValue(fileId, out var author))
         {
             return author;
         }
 
-        if (!_currentlyFetchingFiles.Contains(fileId))
+        if (!currentlyFetchingFiles.Contains(fileId))
         {
-            FetchModDetails(fileId);
+            fetchModDetails(fileId);
         }
 
         return null;
@@ -135,7 +133,7 @@ public static class CrossPromotionManager
             }, "Cancel".Translate(), buttonADestructive: true));
     }
 
-    private static void DrawCrossPromotions(ref Rect canvas, IEnumerable<CrossPromotion> promotions)
+    private static void drawCrossPromotions(ref Rect canvas, IEnumerable<CrossPromotion> promotions)
     {
         var backgroundRect = new Rect(
             canvas.xMin,
@@ -163,10 +161,10 @@ public static class CrossPromotionManager
         Widgets.DrawBoxSolid(backgroundRect, SlightlyDarkBackground);
         if (Mouse.IsOver(outRect) && Event.current.type == EventType.ScrollWheel)
         {
-            _scrollPosition.x += Event.current.delta.y * ScrollSpeed;
+            scrollPosition.x += Event.current.delta.y * ScrollSpeed;
         }
 
-        Widgets.BeginScrollView(outRect, ref _scrollPosition, viewRect);
+        Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
         foreach (var promotion in promotions)
         {
             var normalizedWidth = promotion.NormalizedWidth(height);
@@ -199,16 +197,16 @@ public static class CrossPromotionManager
         Widgets.EndScrollView();
     }
 
-    private static void FetchModDetails(PublishedFileId_t fileId)
+    private static void fetchModDetails(PublishedFileId_t fileId)
     {
         Debug.TracePromotions($"Fetching details for {fileId}...");
-        _currentlyFetchingFiles.Add(fileId);
+        currentlyFetchingFiles.Add(fileId);
         var query = SteamUGC.CreateQueryUGCDetailsRequest([fileId], 1);
         var request = SteamUGC.SendQueryUGCRequest(query);
-        _modDetailsCallResult.Set(request);
+        modDetailsCallResult.Set(request);
     }
 
-    private static void FetchModsForAuthor(AccountID_t author)
+    private static void fetchModsForAuthor(AccountID_t author)
     {
         Debug.TracePromotions($"Fetching mods for {author}...");
         var query = SteamUGC.CreateQueryUserUGCRequest(
@@ -219,12 +217,12 @@ public static class CrossPromotionManager
             AppID, AppID, 1);
         SteamUGC.AddRequiredTag(query, $"{VersionControl.CurrentMajor}.{VersionControl.CurrentMinor}");
         var request = SteamUGC.SendQueryUGCRequest(query);
-        _userModsCallResult.Set(request);
+        userModsCallResult.Set(request);
     }
 
     public static void HandleCrossPromotions(ref Rect canvas, ModMetaData mod)
     {
-        if (!_enabled)
+        if (!enabled)
         {
             return;
         }
@@ -245,7 +243,7 @@ public static class CrossPromotionManager
             return;
         }
 
-        RelevantPromotions ??= PromotionsForAuthor(author.Value)?.Where(p => p.ShouldShow).ToList();
+        RelevantPromotions ??= promotionsForAuthor(author.Value)?.Where(p => p.ShouldShow).ToList();
         if (RelevantPromotions.NullOrEmpty())
         {
             return;
@@ -259,14 +257,14 @@ public static class CrossPromotionManager
         }
 
         Utilities.DoLabel(ref canvas, I18n.PromotionsFor(mod.AuthorsString));
-        DrawCrossPromotions(ref canvas, RelevantPromotions);
+        drawCrossPromotions(ref canvas, RelevantPromotions);
     }
 
     public static void Notify_CrossPromotionPathChanged()
     {
-        _cachePath = null;
-        _cacheCount = null;
-        _cacheSize = null;
+        cachePath = null;
+        cacheCount = null;
+        cacheSize = null;
     }
 
     public static void Notify_UpdateRelevantMods()
@@ -287,8 +285,8 @@ public static class CrossPromotionManager
 
             Debug.TracePromotions($" - {details.m_rgchTitle} ({details.m_ulSteamIDOwner}");
             var author = new CSteamID(details.m_ulSteamIDOwner).GetAccountID();
-            _authorForMod.Add(details.m_nPublishedFileId, author);
-            _currentlyFetchingFiles.Remove(details.m_nPublishedFileId);
+            authorForMod.Add(details.m_nPublishedFileId, author);
+            currentlyFetchingFiles.Remove(details.m_nPublishedFileId);
         }
 
         SteamUGC.ReleaseQueryUGCRequest(result.m_handle);
@@ -314,29 +312,29 @@ public static class CrossPromotionManager
 
         if (author != CSteamID.Nil)
         {
-            _modsForAuthor[author.GetAccountID()] = promotions;
+            modsForAuthor[author.GetAccountID()] = promotions;
             Notify_UpdateRelevantMods();
         }
 
         SteamUGC.ReleaseQueryUGCRequest(result.m_handle);
     }
 
-    public static List<CrossPromotion> PromotionsForAuthor(AccountID_t author)
+    private static List<CrossPromotion> promotionsForAuthor(AccountID_t author)
     {
-        if (_modsForAuthor.TryGetValue(author, out var mods))
+        if (modsForAuthor.TryGetValue(author, out var mods))
         {
             return mods;
         }
 
         mods = [];
-        _modsForAuthor.Add(author, mods);
-        FetchModsForAuthor(author);
+        modsForAuthor.Add(author, mods);
+        fetchModsForAuthor(author);
         return mods;
     }
 
     public static void Update()
     {
-        if (_enabled)
+        if (enabled)
         {
             SteamAPI.RunCallbacks();
         }

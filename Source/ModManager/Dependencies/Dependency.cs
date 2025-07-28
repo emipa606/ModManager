@@ -15,16 +15,16 @@ namespace ModManager;
 
 public abstract class Dependency : ModDependency
 {
-    public const string InvalidPackageId = "invalid.package.id";
+    private const string InvalidPackageId = "invalid.package.id";
 
-    public static readonly Regex packageIdFormatRegex =
-        new Regex(@"(?=.{1,60}$)^(?:[a-z0-9]+\.)+[a-z0-9]+$", RegexOptions.IgnoreCase);
+    private static readonly Regex packageIdFormatRegex =
+        new(@"(?=.{1,60}$)^(?:[a-z0-9]+\.)+[a-z0-9]+$", RegexOptions.IgnoreCase);
 
     protected ModMetaData _target;
     protected bool _targetResolved;
     public Manifest parent;
 
-    protected bool? satisfied;
+    private bool? satisfied;
 
     protected Dependency(Manifest parent, string packageId)
     {
@@ -51,7 +51,7 @@ public abstract class Dependency : ModDependency
             // we don't want to just re-resolve _target if it's null, as we 
             // might have quite a few mods listing other dependencies that 
             // are not installed.
-            _target = ModLister.GetActiveModWithIdentifier(packageId) ??
+            _target = ModLister.GetActiveModWithIdentifier(packageId, true) ??
                       ModLister.GetModWithIdentifier(packageId, true);
             _targetResolved = true;
             return _target;
@@ -67,10 +67,7 @@ public abstract class Dependency : ModDependency
     {
         get
         {
-            if (!satisfied.HasValue)
-            {
-                satisfied = CheckSatisfied();
-            }
+            satisfied ??= CheckSatisfied();
 
             return satisfied.Value;
         }
@@ -98,7 +95,7 @@ public abstract class Dependency : ModDependency
         }
     }
 
-    public static bool TryGetPackageIdFromIdentifier(string identifier, out string packageId)
+    private static bool TryGetPackageIdFromIdentifier(string identifier, out string packageId)
     {
         var allMods = ModLister.AllInstalledMods.ToList();
         var modByFolder = allMods.Find(m => m.FolderName.StripSpaces() == identifier);

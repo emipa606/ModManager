@@ -33,7 +33,7 @@ public class CrossPromotion
     private string PreviewPath =>
         Path.Combine(CrossPromotionManager.CachePath, $"{(Name + "_" + FileId).SanitizeFileName()}.jpg");
 
-    public bool Ready => Preview != null;
+    private bool Ready => Preview != null;
     public PublishedFileId_t FileId => _details.m_nPublishedFileId;
     public string Name => _details.m_rgchTitle;
     public string Description => _details.m_rgchDescription;
@@ -44,7 +44,7 @@ public class CrossPromotion
                                         ModManager.Settings.ShowPromotions_NotActive && !Active);
 
     public bool Installed => ModButtonManager.AllButtons.Any(b => b.Name == Name);
-    public bool Active => ModButtonManager.ActiveButtons.Any(b => b.Name == Name);
+    private bool Active => ModButtonManager.ActiveButtons.Any(b => b.Name == Name);
 
     public int NormalizedWidth(int height)
     {

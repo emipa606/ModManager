@@ -16,9 +16,9 @@ public class Manifest
     private const string ManifestFileName = "Manifest.xml";
     private const string AssembliesFolder = "Assemblies/";
 
-    private static readonly Version _zero = new Version(0, 0);
+    private static readonly Version _zero = new(0, 0);
 
-    private static readonly Dictionary<ModMetaData, Manifest> _manifestCache = new Dictionary<ModMetaData, Manifest>();
+    private static readonly Dictionary<ModMetaData, Manifest> _manifestCache = new();
 
     public static readonly List<Dependency> EmptyRequirementList = [];
 
@@ -26,7 +26,7 @@ public class Manifest
     private readonly List<VersionedDependency> dependencies = [];
 
     public readonly List<Dependency> Dependencies = [];
-    public readonly List<Dependency> Incompatibilities = [];
+    private readonly List<Dependency> Incompatibilities = [];
     private readonly List<Incompatible> incompatibleWith = [];
 
     [Obsolete("dependency management has been implemented in RW from 1.1 onwards.")]
@@ -43,7 +43,7 @@ public class Manifest
     // idem for version itself, also version checking requires this
     private readonly string version;
     private ModContentPack _pack;
-    public List<Dependency> _requirements;
+    private List<Dependency> _requirements;
     private Version _version;
     public string downloadUri;
 
@@ -65,13 +65,13 @@ public class Manifest
     [Obsolete("Multiple target versions have been implemented in RW since 1.0")]
     protected List<string> targetVersions;
 
-    public VersionCheck versionCheck;
+    private VersionCheck versionCheck;
 
     public Manifest()
     {
     }
 
-    public Manifest(ModMetaData mod)
+    private Manifest(ModMetaData mod)
     {
         Mod = mod;
     }
@@ -81,7 +81,7 @@ public class Manifest
         this.version = version;
     }
 
-    public ModContentPack Pack => _pack ??=
+    private ModContentPack Pack => _pack ??=
         LoadedModManager.RunningModsListForReading.Find(mcp => Mod.SamePackageId(mcp.PackageId)) ??
         new ModContentPack(Mod.RootDir, Mod.PackageId, Mod.PackageIdPlayerFacing, int.MaxValue, Mod.Name, Mod.Official);
 
@@ -107,17 +107,14 @@ public class Manifest
     {
         get
         {
-            if (_requirements == null)
-            {
-                _requirements = Dependencies
-                    .Concat(Incompatibilities)
-                    .Concat(LoadBefore)
-                    .Concat(LoadAfter)
-                    .Concat(versionCheck)
-                    .Concat(sourceSync)
-                    .Where(d => d != null)
-                    .ToList();
-            }
+            _requirements ??= Dependencies
+                .Concat(Incompatibilities)
+                .Concat(LoadBefore)
+                .Concat(LoadAfter)
+                .Concat(versionCheck)
+                .Concat(sourceSync)
+                .Where(d => d != null)
+                .ToList();
 
             return _requirements.Where(r => r.IsApplicable);
         }
@@ -254,7 +251,7 @@ public class Manifest
         return ParseVersion(version, Mod);
     }
 
-    internal static Version ParseVersion(string version, ModMetaData mod)
+    private static Version ParseVersion(string version, ModMetaData mod)
     {
         try
         {
@@ -276,7 +273,7 @@ public class Manifest
         }
     }
 
-    public void SetVersion(bool fromAssemblies = true)
+    private void SetVersion(bool fromAssemblies = true)
     {
         if (!version.NullOrEmpty())
         {

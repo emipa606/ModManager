@@ -29,7 +29,7 @@ public class Dialog_Import_FromString : Dialog_ImExport_String
         Close();
     }
 
-    public void Notify_ModListChanged()
+    private void Notify_ModListChanged()
     {
         try
         {

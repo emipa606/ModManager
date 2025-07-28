@@ -12,7 +12,7 @@ public abstract class Dialog_ImExport_String : Window
         closeOnAccept = false;
     }
 
-    public override Vector2 InitialSize => new Vector2(820, 506); // golden ratio-ish
+    public override Vector2 InitialSize => new(820, 506); // golden ratio-ish
     protected override float Margin => 8f;
 
     protected virtual string Content { get; set; }
