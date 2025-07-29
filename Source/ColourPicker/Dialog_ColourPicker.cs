@@ -15,7 +15,7 @@ public class Dialog_ColourPicker : Window
 {
     private readonly Color _alphaBGColorA = Color.white;
 
-    private readonly Color _alphaBGColorB = new Color(.85f, .85f, .85f);
+    private readonly Color _alphaBGColorB = new(.85f, .85f, .85f);
     private readonly float _buttonHeight = 30f;
 
     private readonly Action<Color> _callback;
@@ -32,11 +32,11 @@ public class Dialog_ColourPicker : Window
         _handleSize = 10,
         _recentSize = 20;
 
-    private readonly RecentColours _recentColours = new RecentColours();
+    private readonly RecentColours _recentColours = new();
 
-    public readonly bool autoApply = false;
+    private readonly bool autoApply = false;
     private readonly TextField<string> HexField;
-    public readonly bool minimalistic = false;
+    private readonly bool minimalistic = false;
 
     private readonly TextField<float> RedField,
         GreenField,
@@ -75,7 +75,7 @@ public class Dialog_ColourPicker : Window
     private float _v;
 
     // the colour we're going to pass out if requested
-    public Color curColour;
+    private Color curColour;
 
     /// <summary>
     ///     Call with the current colour, and a callback which will be passed the new colour when 'OK' or 'Apply' is pressed.
@@ -107,16 +107,13 @@ public class Dialog_ColourPicker : Window
 
         textFieldIds =
         [
-            ..new[]
-            {
-                "Hue", "Saturation", "Value", "Alpha1", "Red", "Green", "Blue", "Alpha2", "Hex"
-            }
+            "Hue", "Saturation", "Value", "Alpha1", "Red", "Green", "Blue", "Alpha2", "Hex"
         ];
 
         NotifyRGBUpdated();
     }
 
-    public float A
+    private float A
     {
         get => tempColour.a;
         set
@@ -128,7 +125,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D AlphaPickerBG
+    private Texture2D AlphaPickerBG
     {
         get
         {
@@ -141,7 +138,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float B
+    private float B
     {
         get => tempColour.b;
         set
@@ -153,7 +150,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D ColourPickerBG
+    private Texture2D ColourPickerBG
     {
         get
         {
@@ -166,7 +163,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float G
+    private float G
     {
         get => tempColour.g;
         set
@@ -178,7 +175,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float H
+    private float H
     {
         get => _h;
         set
@@ -190,7 +187,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public string Hex
+    private string Hex
     {
         get => $"#{ColorUtility.ToHtmlStringRGBA(tempColour)}";
         set
@@ -200,7 +197,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D HuePickerBG
+    private Texture2D HuePickerBG
     {
         get
         {
@@ -213,17 +210,17 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Vector2 InitialPosition => _initialPosition ??
-                                      new Vector2(UI.screenWidth - InitialSize.x,
-                                          UI.screenHeight - InitialSize.y) / 2f;
+    private Vector2 InitialPosition => _initialPosition ??
+                                       new Vector2(UI.screenWidth - InitialSize.x,
+                                           UI.screenHeight - InitialSize.y) / 2f;
 
     public override Vector2 InitialSize =>
         // calculate window size to accomodate all elements
-        new Vector2(
+        new(
             _pickerSize + (3 * _margin) + (2 * _sliderWidth) + (2 * _previewSize) + (StandardMargin * 2),
             _pickerSize + (StandardMargin * 2));
 
-    public Texture2D PickerAlphaBG
+    private Texture2D PickerAlphaBG
     {
         get
         {
@@ -236,7 +233,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D PreviewAlphaBG
+    private Texture2D PreviewAlphaBG
     {
         get
         {
@@ -249,7 +246,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D PreviewBG
+    private Texture2D PreviewBG
     {
         get
         {
@@ -262,7 +259,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float R
+    private float R
     {
         get => tempColour.r;
         set
@@ -274,7 +271,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float S
+    private float S
     {
         get => _s;
         set
@@ -286,7 +283,7 @@ public class Dialog_ColourPicker : Window
     }
 
 
-    public Texture2D SliderAlphaBG
+    private Texture2D SliderAlphaBG
     {
         get
         {
@@ -299,7 +296,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Color tempColour
+    private Color tempColour
     {
         get => _tempColour;
         set
@@ -312,7 +309,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public Texture2D TempPreviewBG
+    private Texture2D TempPreviewBG
     {
         get
         {
@@ -325,7 +322,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float UnitsPerPixel
+    private float UnitsPerPixel
     {
         get
         {
@@ -338,7 +335,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public float V
+    private float V
     {
         get => _v;
         set
@@ -349,7 +346,7 @@ public class Dialog_ColourPicker : Window
         }
     }
 
-    public void AlphaAction(float pos)
+    private void AlphaAction(float pos)
     {
         // only changing one value, property should work fine
         A = 1 - (UnitsPerPixel * pos);
@@ -381,7 +378,13 @@ public class Dialog_ColourPicker : Window
             var column = row;
             for (var y = 0; y < height; y += _alphaBGBlockSize)
             {
-                tex.SetPixels(x, y, _alphaBGBlockSize, _alphaBGBlockSize, column % 2 == 0 ? bgA : bgB);
+                // Calculate the block size to ensure it doesn't exceed the texture bounds
+                var blockWidth = Mathf.Min(_alphaBGBlockSize, width - x);
+                var blockHeight = Mathf.Min(_alphaBGBlockSize, height - y);
+
+                // Set the pixels for the current block
+                var blockColors = column % 2 == 0 ? bgA : bgB;
+                tex.SetPixels(x, y, blockWidth, blockHeight, blockColors, 0);
                 column++;
             }
 
@@ -449,13 +452,13 @@ public class Dialog_ColourPicker : Window
         SwapTexture(ref _huePickerBG, tex);
     }
 
-    public void CreatePreviewBG(ref Texture2D bg, Color col)
+    private void CreatePreviewBG(ref Texture2D bg, Color col)
     {
         SwapTexture(ref bg, SolidColorMaterials.NewSolidColorTexture(col));
     }
 
     [Conditional("DEBUG")]
-    public static void Debug(string msg)
+    private static void Debug(string msg)
     {
         if (Traverse.Create(typeof(Log)).Field("reachedMaxMessagesLimit").GetValue<bool>())
         {
@@ -713,7 +716,7 @@ public class Dialog_ColourPicker : Window
     {
         var cols = (int)(canvas.width / _recentSize);
         var rows = (int)(canvas.height / _recentSize);
-        var n = Math.Min(cols * rows, _recentColours.Count);
+        var n = Math.Min(cols * rows, RecentColours.Count);
 
         GUI.BeginGroup(canvas);
         for (var i = 0; i < n; i++)
@@ -740,21 +743,21 @@ public class Dialog_ColourPicker : Window
         GUI.EndGroup();
     }
 
-    public static Color HSVAToRGB(float H, float S, float V, float A)
+    private static Color HSVAToRGB(float H, float S, float V, float A)
     {
         var color = Color.HSVToRGB(H, S, V);
         color.a = A;
         return color;
     }
 
-    public void HueAction(float pos)
+    private void HueAction(float pos)
     {
         // only changing one value, property should work fine
         H = 1 - (UnitsPerPixel * pos);
         _huePosition = pos;
     }
 
-    public void NotifyHexUpdated()
+    private void NotifyHexUpdated()
     {
         Debug($"HEX updated ({Hex})");
 
@@ -775,7 +778,7 @@ public class Dialog_ColourPicker : Window
         BlueField.Value = tempColour.b;
     }
 
-    public void NotifyHSVUpdated()
+    private void NotifyHSVUpdated()
     {
         Debug($"HSV updated: ({_h}, {_s}, {_v})");
 
@@ -800,7 +803,7 @@ public class Dialog_ColourPicker : Window
         HexField.Value = Hex;
     }
 
-    public void NotifyRGBUpdated()
+    private void NotifyRGBUpdated()
     {
         Debug($"RGB updated: ({R}, {G}, {B})");
 
@@ -831,7 +834,7 @@ public class Dialog_ColourPicker : Window
         SetColor();
     }
 
-    public void PickerAction(Vector2 pos)
+    private void PickerAction(Vector2 pos)
     {
         // if we set S, V via properties these will be called twice.
         _s = UnitsPerPixel * pos.x;
@@ -848,10 +851,10 @@ public class Dialog_ColourPicker : Window
         NotifyHSVUpdated();
     }
 
-    public void SetColor()
+    private void SetColor()
     {
         curColour = tempColour;
-        _recentColours.Add(tempColour);
+        RecentColours.Add(tempColour);
         _callback?.Invoke(curColour);
         CreatePreviewBG(ref _previewBG, tempColour);
     }
@@ -870,7 +873,7 @@ public class Dialog_ColourPicker : Window
         windowRect = new Rect(position.x, position.y, size.x, size.y);
     }
 
-    public void SetPickerPositions()
+    private void SetPickerPositions()
     {
         // set slider positions
         _huePosition = (1f - H) / UnitsPerPixel;

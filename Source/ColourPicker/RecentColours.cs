@@ -21,9 +21,9 @@ public class RecentColours
 
     public Color this[int index] => _colors[index];
 
-    public int Count => _colors.Count;
+    public static int Count => _colors.Count;
 
-    public void Add(Color color)
+    public static void Add(Color color)
     {
         _colors.RemoveAll(c => c == color);
         _colors.Insert(0, color);

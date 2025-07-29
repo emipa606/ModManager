@@ -7,4 +7,5 @@
   </Configurations>
   <Project Path="FluffyUI/FluffyUI.csproj" />
   <Project Path="ModManager/ModManager.csproj" />
+  <Project Path="ColourPicker/ColourPicker.csproj" />
 </Solution>

@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.6.1 - Fixed coloring issue
+
+
 1.6.0 - Mod updated for 1.6 and passed autotests
 Used DeepL to update translations for ChineseSimplified, French, German, Italian, Russian, Turkish
 
