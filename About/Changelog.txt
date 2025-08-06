@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.6.2 - Updated chinese translation by TNQOYxNU
+
+
 1.6.1 - Fixed coloring issue
 
 
