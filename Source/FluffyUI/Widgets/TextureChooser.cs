@@ -8,7 +8,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace FluffyUI;
+namespace FluffyUIReduced;
 
 [StaticConstructorOnStartup]
 public class TextureChooser

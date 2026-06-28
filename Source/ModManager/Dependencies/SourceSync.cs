@@ -9,8 +9,6 @@ namespace ModManager;
 
 public class SourceSync : Dependency
 {
-    private string _sourceHash;
-
     public SourceSync(Manifest parent, string packageId) : base(parent, packageId)
     {
     }
@@ -34,7 +32,7 @@ public class SourceSync : Dependency
         }
     }
 
-    private string SourceHash => _sourceHash ??= Target.RootDir.GetFolderHash();
+    private string SourceHash => field ??= Target.RootDir.GetFolderHash();
 
     public override Color Color => IsSatisfied ? Color.white : GenUI.MouseoverColor;
 

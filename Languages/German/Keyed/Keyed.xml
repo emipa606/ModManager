@@ -153,7 +153,7 @@
   <Fluffy.ModManager.CachingMods>Caching modlist</Fluffy.ModManager.CachingMods>
   <Fluffy.ModManager.ConfirmResetMods>Sind Sie sicher?\n\nDadurch wird Ihre gesamte Modliste deaktiviert. Stellen Sie sicher, dass Sie sie zuerst exportieren, wenn Sie Ihre Mod-Reihenfolge speichern möchten.</Fluffy.ModManager.ConfirmResetMods>
   <Fluffy.ModManager.SortMods>Mod-Liste automatisch sortieren</Fluffy.ModManager.SortMods>
-  <Fluffy.ModManager.SortFailed.CyclicDependency>Automatische Sortierung der Mod-Liste nicht möglich</Fluffy.ModManager.SortFailed.CyclicDependency>
+  <Fluffy.ModManager.SortFailed.CyclicDependency>Mod-Liste kann nicht automatisch sortiert werden; {0} und {1} hängen voneinander ab.</Fluffy.ModManager.SortFailed.CyclicDependency>
   <Fluffy.ModManager.ModListExists>{0} existiert bereits. Bitte verwenden Sie einen anderen Namen, oder löschen oder benennen Sie die vorhandene Modliste um.</Fluffy.ModManager.ModListExists>
   <Fluffy.ModManager.OpenDownloadUri>Zum Herunterladen gehen\n&lt;i>{0}&lt;/i></Fluffy.ModManager.OpenDownloadUri>
   <Fluffy.ModManager.NoDownloadUri>Kein Download-Speicherort angegeben.</Fluffy.ModManager.NoDownloadUri>

@@ -18,18 +18,17 @@ public abstract class ModButton
     private List<Dependency> _relevantIssues;
 
     private string _relevantIssuesString;
-    private string _trimmedName;
 
     public virtual string TrimmedName
     {
         get
         {
-            if (_trimmedName.NullOrEmpty())
+            if (field.NullOrEmpty())
             {
-                _trimmedName = Utilities.TrimModName(Name);
+                field = Utilities.TrimModName(Name);
             }
 
-            return _trimmedName;
+            return field;
         }
     }
 

@@ -15,7 +15,7 @@ public class Dialog_ColourPicker : Window
 {
     private readonly Color _alphaBGColorA = Color.white;
 
-    private readonly Color _alphaBGColorB = new(.85f, .85f, .85f);
+    private readonly Color _alphaBGColorB = new Color(.85f, .85f, .85f);
     private readonly float _buttonHeight = 30f;
 
     private readonly Action<Color> _callback;
@@ -32,7 +32,7 @@ public class Dialog_ColourPicker : Window
         _handleSize = 10,
         _recentSize = 20;
 
-    private readonly RecentColours _recentColours = new();
+    private readonly RecentColours _recentColours = new RecentColours();
 
     private readonly bool autoApply = false;
     private readonly TextField<string> HexField;
@@ -56,10 +56,7 @@ public class Dialog_ColourPicker : Window
         _huePickerBG,
         _alphaPickerBG,
         _tempPreviewBG,
-        _previewBG,
-        _pickerAlphaBG,
-        _sliderAlphaBG,
-        _previewAlphaBG;
+        _previewBG;
 
     private float _h;
 
@@ -70,8 +67,6 @@ public class Dialog_ColourPicker : Window
     private float _s;
 
     // used in the picker only
-    private Color _tempColour;
-    private float _unitsPerPixel;
     private float _v;
 
     // the colour we're going to pass out if requested
@@ -216,20 +211,19 @@ public class Dialog_ColourPicker : Window
 
     public override Vector2 InitialSize =>
         // calculate window size to accomodate all elements
-        new(
-            _pickerSize + (3 * _margin) + (2 * _sliderWidth) + (2 * _previewSize) + (StandardMargin * 2),
+        new Vector2(_pickerSize + (3 * _margin) + (2 * _sliderWidth) + (2 * _previewSize) + (StandardMargin * 2),
             _pickerSize + (StandardMargin * 2));
 
     private Texture2D PickerAlphaBG
     {
         get
         {
-            if (_pickerAlphaBG == null)
+            if (field == null)
             {
-                CreateAlphaBG(ref _pickerAlphaBG, _pickerSize, _pickerSize);
+                CreateAlphaBG(ref field, _pickerSize, _pickerSize);
             }
 
-            return _pickerAlphaBG;
+            return field;
         }
     }
 
@@ -237,12 +231,12 @@ public class Dialog_ColourPicker : Window
     {
         get
         {
-            if (_previewAlphaBG == null)
+            if (field == null)
             {
-                CreateAlphaBG(ref _previewAlphaBG, _previewSize, _previewSize);
+                CreateAlphaBG(ref field, _previewSize, _previewSize);
             }
 
-            return _previewAlphaBG;
+            return field;
         }
     }
 
@@ -287,21 +281,21 @@ public class Dialog_ColourPicker : Window
     {
         get
         {
-            if (_sliderAlphaBG == null)
+            if (field == null)
             {
-                CreateAlphaBG(ref _sliderAlphaBG, _sliderWidth, _pickerSize);
+                CreateAlphaBG(ref field, _sliderWidth, _pickerSize);
             }
 
-            return _sliderAlphaBG;
+            return field;
         }
     }
 
     private Color tempColour
     {
-        get => _tempColour;
+        get;
         set
         {
-            _tempColour = value;
+            field = value;
             if (autoApply || minimalistic)
             {
                 SetColor();
@@ -326,12 +320,12 @@ public class Dialog_ColourPicker : Window
     {
         get
         {
-            if (_unitsPerPixel == 0.0f)
+            if (field == 0.0f)
             {
-                _unitsPerPixel = 1f / _pickerSize;
+                field = 1f / _pickerSize;
             }
 
-            return _unitsPerPixel;
+            return field;
         }
     }
 

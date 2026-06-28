@@ -1,47 +1,65 @@
-# GitHub Copilot Instructions for RimWorld Modding Project
+# GitHub Copilot Instructions for Mod Manager (Continued) Mod Project
+
+Welcome to the Mod Manager (Continued) mod project! This file provides guidance on the mod's structure, development, and how to effectively use GitHub Copilot to enhance your contributions.
 
 ## Mod Overview and Purpose
 
-This RimWorld modding project is a comprehensive mod manager tool for RimWorld, designed to improve and streamline the game’s modding experience. The primary purpose of this project is to provide players with robust tools for managing, installing, and customizing mods within RimWorld, enhancing both the ease of use and the overall gameplay experience.
+**Mod Name:** Mod Manager (Continued)  
+**Author:** Update of Fluffy's mod  
+**PackageId:** Mlie.ModManager
+
+The Mod Manager (Continued) is a comprehensive tool designed to improve the way you handle mods in RimWorld, offering a more intuitive and feature-rich mod management experience. It aims to streamline the process of organizing, backing up, and manipulating mods, both from Steam and local copies.
 
 ## Key Features and Systems
 
-- **Colour Picker**: A custom UI for selecting colors, allowing users to choose and preview color themes using a dialog interface.
-- **Mod Management**: Provides interfaces for listing, importing, exporting, and configuring mods, including features to rename mod lists and handle version control.
-- **Harmony Patching Support**: Incorporates Harmony patches to modify the game’s runtime behavior without altering the original game code.
-- **Dependency Management**: Tools for checking and handling mod dependencies, ensuring compatibility and load order correctness.
-- **User Interface Enhancements**: Additional UI components such as floating menus, selectable options, and customizable elements for a seamless integration experience.
+- **Enhanced Mod Management Screen:** Provides distinct lists for available and active mods with drag-and-drop functionality and search filtering.
+- **Mod Copy Creation:** Easily create local backups of Steam mods to ensure game stability during updates.
+- **Mod List Backups:** Save and load mod lists, aiding in quick restoration of your preferred setups.
+- **Steam Subscription Management:** Subscribe to missing workshop mods directly from the mod manager interface.
+- **Mod and Mod List Coloring:** Customize mod visibility with individual and list-wide color settings.
+- **Keyboard Navigation:** Enhanced keyboard controls for efficient mod browsing and management.
+- **Mod Promotions:** Discover other mods by favorite authors effortlessly.
 
 ## Coding Patterns and Conventions
 
-- **Classes and Methods**: The project uses clear class naming conventions and public/private method organization to maintain a clean code structure. Each class file typically defines a single class and related methods.
-  
-- **Static Classes and Methods**: Where appropriate, static classes and methods are used, especially for utility and helper functions, ensuring efficient resource handling.
-
-- **XML Integration**: XML files are employed for storing mod configurations, allowing for external modification and easy serialization/deserialization of data.
-
-- **Use of Interfaces**: The implementation of interfaces like `IExposable` and `IRenameable` facilitates modular design and extends the mod's capabilities for saving and renaming functionalities.
+- **C# File Organization:** The mod organizes its features into logical components with utility classes like `Direction`, `Extensions`, and specialized controls like `FloatMenuOption_Aligned`. Familiarize yourself with these utilities for consistent development.
+- **Naming Conventions:** Stick to PascalCase for type and method names while using camelCase for local variables.
+- **Documentation:** Annotate methods and classes inline with XML documentation comments for clarity and maintainability.
 
 ## XML Integration
 
-- This project effectively leverages XML for configuration management, using it to maintain mod data and dependency information.
-  
-- **Loading XML Data**: Methods like `LoadDataFromXmlCustom(XmlNode root)` are employed for custom XML data loading, ensuring compatibility and the ability to incorporate unique mod features from XML nodes.
+- **Manifest.xml:** Utilization of a Manifest file enables version, dependency, and incompatibility checks, enhancing the mod's functionality beyond what is available in vanilla.
+- **About.xml and other XML files:** Ensure correct references and dependencies are maintained. The `About.xml` file currently depends on `brrainz.harmony`.
 
 ## Harmony Patching
 
-- Harmony is used to apply runtime modifications by creating patches to the existing game code. This ensures modular and conflict-free changes.
-
-- **Patch Example**: Use simple C# classes to define pre/post-fix methods which Harmony recognizes for patching purposes. Typical patches might modify game behavior or enhance functionality without affecting the core system negatively.
+- **Harmony Usage:** This mod utilizes Harmony (brrainz.harmony) for patching RimWorld's code. Make sure to follow Harmony's guidelines for safe and efficient patching. Study existing patches and structure new patches accordingly to avoid conflicts.
 
 ## Suggestions for Copilot
 
-- **Class Templates**: Use Copilot to generate class and method templates, especially for repetitive patterns like user interface components or Harmony patches.
-  
-- **XML Parsing Helpers**: Leverage Copilot's suggestions to create XML parsing and handling functions, reducing manual coding errors and increasing efficiency.
+To make the most of GitHub Copilot in this mod project:
 
-- **Utility Functions**: Encourage Copilot to suggest utility function enhancements and additional methods for commonly needed operations, such as color conversions or UI rendering functions.
+1. **Utilize Boilerplate Generation:** Use Copilot to quickly generate boilerplate code for new C# classes and methods.
+2. **Leverage Documentation Assistance:** Let Copilot assist in writing XML documentation for your new methods and classes.
+3. **Predictive Code Completion:** Use Copilot’s predictive capabilities to speed up writing repetitive tasks like property definitions or default constructors.
+4. **Code Cleanup and Refactoring:** Rely on Copilot suggestions to refactor and enhance readability of complex logic.
+5. **XML File Completion:** When adding new entries or dependencies in XML files, use Copilot to ensure syntax consistency and completeness.
 
-- **Test Case Generation**: Utilize Copilot’s ability to assist in creating test cases to cover various mod scenarios and ensure robust functionality.
+Feel free to enhance this guide as the mod evolves to keep it up-to-date with the latest development practices and project changes. Happy modding!
 
-By following these instructions and practices, developers can effectively use GitHub Copilot to enhance their workflow in modding projects for RimWorld, leading to improved mod quality and user experience.
+
+This `.github/copilot-instructions.md` file provides a comprehensive overview of the mod project, while also outlining coding practices, XML integration, and specific guidance on using GitHub Copilot effectively within the modding workflow.
+
+## Project Solution Guidelines
+- Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
+- Use these in-solution XML files as the primary files for reference and modification.
+- The `.github/copilot-instructions.md` file is included in the solution under the `.github` solution folder, so it should be read/modified from within the solution instead of using paths outside the solution. Update this file once only, as it and the parent-path solution reference point to the same file in this workspace.
+- When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
+- In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
+- For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
+
+
+## Hard rules (must follow)
+- Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
+- Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+

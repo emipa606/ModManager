@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using FluffyUI;
+using FluffyUIReduced;
 using RimWorld;
 using UnityEngine;
 using Verse;

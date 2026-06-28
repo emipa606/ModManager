@@ -4,7 +4,7 @@
 using UnityEngine;
 using Verse;
 
-namespace FluffyUI;
+namespace FluffyUIReduced;
 
 public static class Widgets
 {

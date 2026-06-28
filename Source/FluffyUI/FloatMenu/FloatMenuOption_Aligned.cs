@@ -8,7 +8,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace FluffyUI.FloatMenu;
+namespace FluffyUIReduced.FloatMenu;
 
 public class FloatMenuOption_Aligned : FloatMenuOption
 {

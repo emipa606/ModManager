@@ -319,37 +319,43 @@ public class ModList : IExposable, IRenameable
 
     private static void LogObject(object obj, int lvl = 0)
     {
-        Debug.Log(new string('\t', lvl) + obj);
-        if (obj is Dictionary<object, object> dict)
+        while (true)
         {
-            foreach (var entry in dict)
+            Debug.Log(new string('\t', lvl) + obj);
+            if (obj is Dictionary<object, object> dict)
             {
-                LogObject(entry, lvl + 1);
+                foreach (var entry in dict)
+                {
+                    LogObject(entry, lvl + 1);
+                }
             }
-        }
 
-        if (obj is List<object> list)
-        {
-            foreach (var entry in list)
+            if (obj is List<object> list)
             {
-                LogObject(entry, lvl + 1);
+                foreach (var entry in list)
+                {
+                    LogObject(entry, lvl + 1);
+                }
             }
-        }
 
-        if (obj is not KeyValuePair<object, object> pair)
-        {
-            return;
-        }
+            if (obj is not KeyValuePair<object, object> pair)
+            {
+                return;
+            }
 
-        Debug.Log($"{new string('\t', lvl)}{pair.Key}: {pair.Value}");
-        if (pair.Value is List<object> list2)
-        {
-            LogObject(list2, lvl);
-        }
+            Debug.Log($"{new string('\t', lvl)}{pair.Key}: {pair.Value}");
+            if (pair.Value is List<object> list2)
+            {
+                LogObject(list2, lvl);
+            }
 
-        if (pair.Value is Dictionary<object, object> dict2)
-        {
-            LogObject(dict2, lvl);
+            if (pair.Value is Dictionary<object, object> dict2)
+            {
+                obj = dict2;
+                continue;
+            }
+
+            break;
         }
     }
 

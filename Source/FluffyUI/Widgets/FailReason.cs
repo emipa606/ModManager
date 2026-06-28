@@ -1,7 +1,7 @@
 ﻿// FailReason.cs
 // Copyright Karel Kroeze, 2018-2018
 
-namespace FluffyUI;
+namespace FluffyUIReduced;
 
 public struct FailReason
 {

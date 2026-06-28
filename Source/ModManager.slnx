@@ -5,7 +5,16 @@
   <Configurations>
     <BuildType Name="Release" />
   </Configurations>
-  <Project Path="FluffyUI/FluffyUI.csproj" />
+  <Project Path="FluffyUI/FluffyUIReduced.csproj" />
   <Project Path="ModManager/ModManager.csproj" />
   <Project Path="ColourPicker/ColourPicker.csproj" />
+  <Folder Name="/XML/Languages/" />
+  <Folder Name="/XML/Languages/English/" />
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Keyed.xml" />
+  </Folder>
+  <Folder Name="/XML/" />
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
 </Solution>

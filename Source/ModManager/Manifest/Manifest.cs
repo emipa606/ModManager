@@ -42,9 +42,7 @@ public class Manifest
 
     // idem for version itself, also version checking requires this
     private readonly string version;
-    private ModContentPack _pack;
     private List<Dependency> _requirements;
-    private Version _version;
     public string downloadUri;
 
     [Obsolete("mods should implement a packageId in About.xml")]
@@ -81,7 +79,7 @@ public class Manifest
         this.version = version;
     }
 
-    private ModContentPack Pack => _pack ??=
+    private ModContentPack Pack => field ??=
         LoadedModManager.RunningModsListForReading.Find(mcp => Mod.SamePackageId(mcp.PackageId)) ??
         new ModContentPack(Mod.RootDir, Mod.PackageId, Mod.PackageIdPlayerFacing, int.MaxValue, Mod.Name, Mod.Official);
 
@@ -89,14 +87,14 @@ public class Manifest
     {
         get
         {
-            if (_version == null)
+            if (field == null)
             {
                 SetVersion(false);
             }
 
-            return _version;
+            return field;
         }
-        private set => _version = value;
+        private set;
     }
 
     public bool HasVersion => Version > _zero;
@@ -246,9 +244,9 @@ public class Manifest
         }
     }
 
-    private Version ParseVersion(string version)
+    private Version ParseVersion(string incomingVersion)
     {
-        return ParseVersion(version, Mod);
+        return ParseVersion(incomingVersion, Mod);
     }
 
     private static Version ParseVersion(string version, ModMetaData mod)

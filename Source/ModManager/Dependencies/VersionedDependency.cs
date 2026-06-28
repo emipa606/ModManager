@@ -14,7 +14,6 @@ namespace ModManager;
 public class VersionedDependency : Dependency
 {
     private static readonly Regex SteamIdRegex = new(@"(\d*)$");
-    private Range _range = new(">= 0.0.0");
     protected bool versioned;
 
     public VersionedDependency() : base(null, string.Empty)
@@ -31,13 +30,13 @@ public class VersionedDependency : Dependency
 
     public Range Range
     {
-        get => _range;
+        get;
         private set
         {
             versioned = true;
-            _range = value;
+            field = value;
         }
-    }
+    } = new(">= 0.0.0");
 
     public override int Severity
     {

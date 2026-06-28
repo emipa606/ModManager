@@ -16,8 +16,6 @@ namespace ModManager;
 
 public static class CrossPromotionManager
 {
-    private static AppId_t appId = AppId_t.Invalid;
-
     private static readonly Dictionary<PublishedFileId_t, AccountID_t> authorForMod = new();
 
     private static int? cacheCount;
@@ -52,14 +50,14 @@ public static class CrossPromotionManager
     {
         get
         {
-            if (enabled && appId == AppId_t.Invalid)
+            if (enabled && field == AppId_t.Invalid)
             {
-                appId = SteamUtils.GetAppID();
+                field = SteamUtils.GetAppID();
             }
 
-            return appId;
+            return field;
         }
-    }
+    } = AppId_t.Invalid;
 
     public static int CacheCount => cacheCount ??= new DirectoryInfo(CachePath).GetFiles().Length;
 
