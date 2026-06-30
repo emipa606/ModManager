@@ -163,18 +163,37 @@ public class VersionedDependency : Dependency
         // 1 part: packageId only.
         // 2 parts: packageId op:version     || where version is attached to the op, e.g. >1.0.0
         // 3 parts: packageId op version
+        // Multi-word mod names (e.g. "Colored Mood Bars") would split into 3 parts with the
+        // last two misinterpreted as a version range. Catch any Range parse failure and fall back
+        // to treating the whole inner text as the package identifier.
         switch (parts.Length)
         {
             case 1:
                 _packageId = parts[0];
                 break;
             case 2:
-                _packageId = parts[0];
-                Range = new Range(parts[1], true);
+                try
+                {
+                    _packageId = parts[0];
+                    Range = new Range(parts[1], true);
+                }
+                catch
+                {
+                    _packageId = root.InnerText;
+                }
+
                 break;
             case 3:
-                _packageId = parts[0];
-                Range = new Range(parts.Skip(1).StringJoin(""));
+                try
+                {
+                    _packageId = parts[0];
+                    Range = new Range(parts.Skip(1).StringJoin(""));
+                }
+                catch
+                {
+                    _packageId = root.InnerText;
+                }
+
                 break;
             default:
                 _packageId = root.InnerText;

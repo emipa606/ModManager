@@ -60,6 +60,9 @@ public class Manifest
     // suggestions
     public List<string> suggests = [];
 
+    // ignored metadata fields present in some Manifest.xml files
+    public List<string> supportedLanguages = [];
+
     [Obsolete("Multiple target versions have been implemented in RW since 1.0")]
     protected List<string> targetVersions;
 
@@ -89,7 +92,10 @@ public class Manifest
         {
             if (field == null)
             {
-                SetVersion(false);
+                // Scan assemblies lazily on first access rather than eagerly for every mod
+                // during the initial load. For available mods that are never selected, the
+                // expensive FileVersionInfo.GetVersionInfo call is avoided entirely.
+                SetVersion();
             }
 
             return field;
@@ -216,9 +222,8 @@ public class Manifest
                 $"parent={dependency.parent?.Mod.ToString() ?? "NULL"}, targetId={dependency.packageId}, target={dependency.Target}, type={dependency.GetType()}");
         }
 
-        // resolve version - if set in manifest that takes priority,
-        // otherwise try to read version from assemblies.
-        manifest.SetVersion();
+        // Version is resolved lazily via the Version property getter (SetVersion is called on
+        // first access). This avoids DLL-scanning every available mod during the initial load.
         _manifestCache.Add(mod, manifest);
         return manifest;
     }

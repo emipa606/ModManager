@@ -793,18 +793,27 @@ public class Page_BetterModConfig : Page_ModsConfig
 
         DoFilterField(filterRect, ref _availableFilter, ref _availableFilterVisible, FocusArea.AvailableFilter);
 
-        var alternate = false;
-
         Widgets.BeginScrollView(outRect, ref _availableScrollPosition, viewRect);
-        foreach (var button in buttons)
+
+        // Virtualized rendering: only call DoModButton for buttons in the visible window.
+        // With 2000+ mods, processing all of them every frame triggers Manifest.For for every mod.
+        var firstVisible = Mathf.Max(0, Mathf.FloorToInt(_availableScrollPosition.y / ModButtonHeight));
+        var lastVisible = Mathf.Min(
+            buttons.Count - 1,
+            firstVisible + Mathf.CeilToInt(outRect.height / ModButtonHeight) + 1);
+        modRect.y = viewRect.yMin + firstVisible * ModButtonHeight;
+        var alternate = firstVisible % 2 != 0;
+
+        for (var i = firstVisible; i <= lastVisible; i++)
         {
+            var button = buttons[i];
             button.DoModButton(modRect, alternate, () => Selected = button, () => button.Active = true,
                 _availableFilterVisible, _availableFilter);
             alternate = !alternate;
             modRect.y += ModButtonHeight;
         }
 
-        // handle drag & drop
+        // handle drag & drop (ContainerUpdate still receives the full list for correct drop indexing)
         var dropped = DraggingManager.ContainerUpdate(buttons, viewRect, out var hoverIndex);
         var draggingOverAvailable = hoverIndex >= 0;
         if (draggingOverAvailable != _draggingOverAvailable)
@@ -864,8 +873,6 @@ public class Page_BetterModConfig : Page_ModsConfig
 
         DoFilterField(filterRect, ref _activeFilter, ref _activeFilterVisible, FocusArea.ActiveFilter);
 
-        var alternate = false;
-
         Widgets.BeginScrollView(outRect, ref _activeScrollPosition, viewRect);
         if (DraggingManager.ContainerUpdate(buttons, viewRect, out var hoverIndex))
         {
@@ -888,9 +895,17 @@ public class Page_BetterModConfig : Page_ModsConfig
             SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
         }
 
-        for (var i = 0; i < buttons.Count; i++)
+        // Virtualized rendering: only process buttons in the visible scroll window.
+        var firstVisible = Mathf.Max(0, Mathf.FloorToInt(_activeScrollPosition.y / ModButtonHeight));
+        var lastVisible = Mathf.Min(
+            buttons.Count - 1,
+            firstVisible + Mathf.CeilToInt(outRect.height / ModButtonHeight) + 1);
+        modRect.y = viewRect.yMin + firstVisible * ModButtonHeight;
+        var alternate = firstVisible % 2 != 0;
+
+        for (var i = firstVisible; i <= lastVisible; i++)
         {
-            var mod = buttons.ElementAt(i);
+            var mod = buttons[i];
 
             mod.DoModButton(modRect, alternate, () => Selected = mod, () => mod.Active = false,
                 _activeFilterVisible, _activeFilter);
@@ -906,7 +921,8 @@ public class Page_BetterModConfig : Page_ModsConfig
             modRect.y += ModButtonHeight;
         }
 
-        if (hoverIndex == buttons.Count)
+        // End-of-list drop indicator: only draw when the last button is in the visible window.
+        if (hoverIndex == buttons.Count && lastVisible >= buttons.Count - 1)
         {
             GUI.color = Color.grey;
             Widgets.DrawLineHorizontal(modRect.xMin, modRect.yMin, modRect.width);

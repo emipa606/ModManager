@@ -126,10 +126,18 @@ public static class ModButtonManager
         _activeButtons = [];
         _availableButtons = [];
 
-        // create all the buttons
+        // Populate lists directly instead of going through TryAdd, which calls list.Contains() and
+        // SortAvailable() on every insertion. Both are O(n) / O(n log n) per call, making the full
+        // loop O(n²) / O(n² log n). The lists are freshly created here so no duplicate checks are
+        // needed; a single sort at the end is sufficient.
         foreach (var mods in ModLister.AllInstalledMods.GroupBy(m => Utilities.TrimModName(m.Name)))
         {
-            TryAdd(new ModButton_Installed(mods), false);
+            var button = new ModButton_Installed(mods);
+            _allButtons.Add(button);
+            if (button.Active)
+                _activeButtons.Add(button);
+            else
+                _availableButtons.Add(button);
         }
 
         SortActive();

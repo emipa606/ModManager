@@ -1,10 +1,7 @@
 // Dependency.cs
 // Copyright Karel Kroeze, 2020-2020
 
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using RimWorld;
@@ -97,18 +94,26 @@ public abstract class Dependency : ModDependency
 
     private static bool TryGetPackageIdFromIdentifier(string identifier, out string packageId)
     {
-        var allMods = ModLister.AllInstalledMods.ToList();
-        var modByFolder = allMods.Find(m => m.FolderName.StripSpaces() == identifier);
-        if (modByFolder != null)
+        // Enumerate directly instead of calling .ToList() on every invocation.
+        // Folder-name match has priority over display-name match (same as before).
+        string nameMatch = null;
+        foreach (var m in ModLister.AllInstalledMods)
         {
-            packageId = modByFolder.PackageId.StripPostfixes();
-            return true;
+            if (m.FolderName.StripSpaces() == identifier)
+            {
+                packageId = m.PackageId.StripPostfixes();
+                return true;
+            }
+
+            if (nameMatch == null && m.Name.StripSpaces() == identifier)
+            {
+                nameMatch = m.PackageId.StripPostfixes();
+            }
         }
 
-        var modByName = allMods.Find(m => m.Name.StripSpaces() == identifier);
-        if (modByName != null)
+        if (nameMatch != null)
         {
-            packageId = modByName.PackageId.StripPostfixes();
+            packageId = nameMatch;
             return true;
         }
 
@@ -118,38 +123,30 @@ public abstract class Dependency : ModDependency
 
     protected void TryParseIdentifier(string text, XmlNode node)
     {
-        try
+        if (packageIdFormatRegex.IsMatch(text))
         {
-            if (!packageIdFormatRegex.IsMatch(text))
-            {
-                if (TryGetPackageIdFromIdentifier(text, out packageId))
-                {
-                    if (Prefs.DevMode)
-                    {
-                        Log.Message($"Invalid packageId '{text}' resolved to '{packageId}'");
-                    }
-                }
-                else
-                {
-                    throw new InvalidDataException($"Invalid packageId: '{text}'");
-                }
-            }
-            else
-            {
-                packageId = text;
-            }
+            packageId = text;
+            return;
         }
-        catch (Exception ex)
+
+        if (TryGetPackageIdFromIdentifier(text, out packageId))
         {
-#if DEBUG
-                Log.Message($"Failed to parse dependency: {node.OuterXml}.\nInner exception: {ex}");
-#else
             if (Prefs.DevMode)
             {
-                Log.Warning(
-                    $"Failed to parse dependency: {node.OuterXml}.\nInner exception: {ex}");
+                Log.Message($"Invalid packageId '{text}' resolved to '{packageId}'");
             }
-#endif
+
+            return;
         }
+
+        // Could not resolve – leave packageId as InvalidPackageId (set by TryGetPackageIdFromIdentifier).
+#if DEBUG
+        Log.Message($"Failed to parse dependency: {node.OuterXml}.\nInner exception: Invalid packageId: '{text}'");
+#else
+        if (Prefs.DevMode)
+        {
+            Log.Warning($"Failed to parse dependency: {node.OuterXml}.\nInner exception: Invalid packageId: '{text}'");
+        }
+#endif
     }
 }

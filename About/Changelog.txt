@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.6.4 - Added on demand loading of some properties, opening the mod-window with a lot of mods will be a lot quicker now as will scrolling.
+
+
 1.6.3 - Renamed namespace to not conflict with other continued fluffy mods depending on the fluffyui-assembly
 Used DeepL to update translations for German, Russian, Turkish
 
