@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.6.5 - Added some null-checks, hopefully fixes some users issues
+
+
 1.6.4 - Added on demand loading of some properties, opening the mod-window with a lot of mods will be a lot quicker now as will scrolling.
 
 

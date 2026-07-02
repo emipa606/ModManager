@@ -199,8 +199,10 @@ public static class I18n
 
     public static string DependencyWrongVersion(ModMetaData tgt, VersionedDependency depend)
     {
-        return Key("DependencyWrongVersion")
-            .Translate(tgt.Name, depend.Range.ToString(), tgt.GetManifest().Version.ToString());
+        var name = tgt?.Name ?? "[?]";
+        var range = depend?.Range?.ToString() ?? "[?]";
+        var version = tgt?.GetManifest()?.Version?.ToString() ?? "[?]";
+        return Key("DependencyWrongVersion").Translate(name, range, version);
     }
 
     public static string DependencyNotActive(ModMetaData tgt)
@@ -210,7 +212,7 @@ public static class I18n
 
     public static string DependencyMet(ModMetaData tgt)
     {
-        return Key("DependencyMet").Translate(tgt.Name, tgt.GetManifest()?.Version.ToString() ?? "[?]");
+        return Key("DependencyMet").Translate(tgt.Name, tgt.GetManifest()?.Version?.ToString() ?? "[?]");
     }
 
     public static string IncompatibleMod(string name)
@@ -370,7 +372,7 @@ public static class I18n
 
     public static string ActivateMod(ModMetaData mod)
     {
-        return Key("ActivateMod").Translate(mod.Name, Manifest.For(mod)?.Version.ToString(),
+        return Key("ActivateMod").Translate(mod.Name, Manifest.For(mod)?.Version?.ToString() ?? "[?]",
             Key("ContentSource", mod.Source.ToString()).Translate());
     }
 

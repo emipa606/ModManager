@@ -41,8 +41,8 @@ public class Incompatible : VersionedDependency
     }
 
     public override string Tooltip => I18n.IncompatibleMod(versioned
-        ? $"{Target?.Name} v{Target?.GetManifest().Version}"
-        : Target?.Name);
+        ? $"{Target?.Name} v{Target?.GetManifest()?.Version?.ToString() ?? "[?]"}"
+        : Target?.Name ?? "[?]");
 
     protected override bool CheckSatisfied()
     {

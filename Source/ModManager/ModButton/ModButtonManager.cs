@@ -135,9 +135,13 @@ public static class ModButtonManager
             var button = new ModButton_Installed(mods);
             _allButtons.Add(button);
             if (button.Active)
+            {
                 _activeButtons.Add(button);
+            }
             else
+            {
                 _availableButtons.Add(button);
+            }
         }
 
         SortActive();
@@ -163,7 +167,8 @@ public static class ModButtonManager
     {
         foreach (var mod in ActiveMods)
         {
-            mod.GetManifest().Notify_Recache();
+            var manifest = mod.GetManifest();
+            manifest?.Notify_Recache();
         }
     }
 

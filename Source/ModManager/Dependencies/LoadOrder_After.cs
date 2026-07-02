@@ -15,12 +15,18 @@ public class LoadOrder_After(Manifest parent, string packageId) : LoadOrder(pare
         get
         {
             var options = Utilities.NewOptionsList;
-            options.Add(new FloatMenuOption(I18n.MoveAfter(parent.Button, Target.GetManifest().Button),
-                () => ModButtonManager.MoveAfter(
-                    parent.Button, Target.GetManifest().Button)));
-            options.Add(new FloatMenuOption(I18n.MoveBefore(Target.GetManifest().Button, parent.Button),
-                () => ModButtonManager.MoveBefore(
-                    Target.GetManifest().Button, parent.Button)));
+            var targetManifest = Target?.GetManifest();
+            var targetButton = targetManifest?.Button;
+            if (targetButton == null)
+            {
+                return options;
+            }
+
+            options.Add(new FloatMenuOption(I18n.MoveAfter(parent.Button, targetButton),
+                () => ModButtonManager.MoveAfter(parent.Button, targetButton)));
+            options.Add(new FloatMenuOption(I18n.MoveBefore(targetButton, parent.Button),
+                () => ModButtonManager.MoveBefore(targetButton, parent.Button)));
+
             return options;
         }
     }

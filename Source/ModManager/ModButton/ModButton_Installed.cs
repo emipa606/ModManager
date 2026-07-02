@@ -81,15 +81,9 @@ public sealed class ModButton_Installed : ModButton
         }
         private set
         {
-            if (value != null)
-            {
-                value.Active = Selected?.Active ?? false;
-            }
+            value?.Active = Selected?.Active ?? false;
 
-            if (Selected != null)
-            {
-                Selected.Active = false;
-            }
+            Selected?.Active = false;
 
             _selected = value;
             _titleLinkOptions = null;
@@ -283,7 +277,7 @@ public sealed class ModButton_Installed : ModButton
         }
     }
 
-    private string GetVersionTip(ModMetaData mod)
+    private static string GetVersionTip(ModMetaData mod)
     {
         return mod.VersionCompatible ? I18n.CurrentVersion : I18n.DifferentVersion(mod);
     }
@@ -581,7 +575,8 @@ public sealed class ModButton_Installed : ModButton
         // mod version
         if (Manifest.HasVersion)
         {
-            Widgets.Label(versionRect, Manifest.Version.ToString());
+            var manifest = Manifest;
+            Widgets.Label(versionRect, manifest?.Version?.ToString() ?? "[?]");
         }
 
         Text.Anchor = TextAnchor.UpperLeft;

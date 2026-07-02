@@ -339,7 +339,7 @@ public static class IO
             SetUniquePackageId(copy);
             ModManager.UserData[copy].Source = mod;
             var manifest = copy.GetManifest();
-            manifest.sourceSync = new SourceSync(manifest, mod.PackageId);
+            manifest?.sourceSync = new SourceSync(manifest, mod.PackageId);
 
             (ModLister.AllInstalledMods as List<ModMetaData>)?.Add(copy);
 

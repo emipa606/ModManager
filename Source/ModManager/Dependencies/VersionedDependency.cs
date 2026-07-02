@@ -73,8 +73,13 @@ public class VersionedDependency : Dependency
 
             if (IsAvailable && IsInRange)
             {
-                options.Add(new FloatMenuOption(I18n.ActivateMod(Target),
-                    () => Target.GetManifest().Button.Active = true));
+                var manifest = Target?.GetManifest();
+                var button = manifest?.Button;
+                if (button != null)
+                {
+                    options.Add(new FloatMenuOption(I18n.ActivateMod(Target),
+                        () => button.Active = true));
+                }
             }
             else if (!downloadUrl.NullOrEmpty() || !steamWorkshopUrl.NullOrEmpty())
             {
@@ -133,14 +138,14 @@ public class VersionedDependency : Dependency
     }
 
     private bool IsAvailable => Target != null;
-    protected bool IsActive => Target?.GetManifest().Button.Active ?? false;
+    protected bool IsActive => Target?.GetManifest()?.Button?.Active ?? false;
     public override bool IsApplicable => parent?.Mod?.Active ?? false;
 
     protected bool IsInRange
     {
         get
         {
-            var v = Target?.GetManifest().Version;
+            var v = Target?.GetManifest()?.Version;
             return v != null && Range.IsSatisfied($"{v.Major}.{v.Minor}.{v.Build}", true);
         }
     }
