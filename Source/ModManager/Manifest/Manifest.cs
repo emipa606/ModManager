@@ -294,6 +294,10 @@ public class Manifest
                 Version = ParseVersion(FileVersionInfo
                     .GetVersionInfo(assemblies.Last().Value.FullName).FileVersion);
             }
+            else
+            {
+                Version = new Version(0, 0, 0);
+            }
         }
         else
         {

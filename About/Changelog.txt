@@ -1,5 +1,8 @@
 # Changelog for ModManager
 
+1.6.6 - Fixed version check for packages with no assemblies
+
+
 1.6.5 - Added some null-checks, hopefully fixes some users issues
 
 
