@@ -182,4 +182,6 @@
   <!-- End deprecated -->
   <!-- Start replacement strings for import/export -->
   <!-- End replacement strings -->
+  <Fluffy.ModManager.Undo>Annulla</Fluffy.ModManager.Undo>
+  <Fluffy.ModManager.Redo>Riprova</Fluffy.ModManager.Redo>
 </LanguageData>

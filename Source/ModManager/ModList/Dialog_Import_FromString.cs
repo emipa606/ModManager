@@ -24,6 +24,7 @@ public class Dialog_Import_FromString : Dialog_ImExport_String
             return;
         }
 
+        Page_BetterModConfig.Instance?.Notify_RecordingModListChange();
         ModList.Import(Event.current.shift);
         Messages.Message(I18n.XModsImportedFromString(ModList.Mods.Count), MessageTypeDefOf.TaskCompletion, false);
         Close();

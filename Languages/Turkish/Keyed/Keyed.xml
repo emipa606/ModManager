@@ -187,4 +187,6 @@
   <!-- End deprecated -->
   <!-- Start replacement strings for import/export -->
   <!-- End replacement strings -->
+  <Fluffy.ModManager.Undo>Geri al</Fluffy.ModManager.Undo>
+  <Fluffy.ModManager.Redo>Yeniden yap</Fluffy.ModManager.Redo>
 </LanguageData>

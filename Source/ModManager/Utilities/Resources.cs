@@ -48,6 +48,10 @@ public class Resources
 
     public static readonly Texture2D Wand;
 
+    public static readonly Texture2D Undo;
+
+    public static readonly Texture2D Redo;
+
     public static readonly Texture2D[] Spinner;
 
     public static readonly Color WindowBGBorderColor = new ColorInt(97, 108, 122).ToColor;
@@ -71,6 +75,8 @@ public class Resources
         Gear = ContentFinder<Texture2D>.Get("UI/Icons/Gear");
         Check = ContentFinder<Texture2D>.Get("UI/Widgets/CheckOn");
         Wand = ContentFinder<Texture2D>.Get("UI/Icons/Wand");
+        Undo = ContentFinder<Texture2D>.Get("UI/Icons/Undo");
+        Redo = ContentFinder<Texture2D>.Get("UI/Icons/Redo");
 
         Status_Cross = ContentFinder<Texture2D>.Get("UI/Icons/Status/Cross");
         Status_Down = ContentFinder<Texture2D>.Get("UI/Icons/Status/Down");

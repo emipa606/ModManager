@@ -1,5 +1,9 @@
 # Changelog for ModManager
 
+1.6.7 - Added undo/redo buttons to the mod-window
+Used DeepL to update translations for ChineseSimplified, French, German, Italian, Japanese, Russian, Turkish
+
+
 1.6.6 - Fixed version check for packages with no assemblies
 
 

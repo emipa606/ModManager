@@ -17,10 +17,13 @@ namespace ModManager;
 
 public class Page_BetterModConfig : Page_ModsConfig
 {
+    private readonly ModListHistory _history = new();
     private string _activeFilter;
     private bool _activeFilterVisible = true;
     private int _activeModsHash;
     private Vector2 _activeScrollPosition = Vector2.zero;
+
+    private bool _applyingHistoryState;
     private string _availableFilter;
     private bool _availableFilterVisible;
     private Vector2 _availableScrollPosition = Vector2.zero;
@@ -234,7 +237,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         _width = windowRect.width;
     }
 
-    private void DoAvailableModButtons(Rect canvas)
+    private static void DoAvailableModButtons(Rect canvas)
     {
         Widgets.DrawBoxSolid(canvas, SlightlyDarkBackground);
         canvas = canvas.ContractedBy(SmallMargin / 2f);
@@ -342,9 +345,57 @@ public class Page_BetterModConfig : Page_ModsConfig
                     direction: UIDirection.RightThenDown))
             {
                 Find.WindowStack.Add(new Dialog_MessageBox(I18n.ConfirmResetMods, I18n.Yes,
-                    () => ModButtonManager.Reset(), I18n.Cancel,
+                    ResetModListWithHistory, I18n.Cancel,
                     buttonADestructive: true));
             }
+        }
+
+        // Undo button
+        var undoTooltip = _history.CanUndo
+            ? $"{I18n.Undo} ({_history.UndoCount})"
+            : I18n.Undo;
+
+        if (_history.CanUndo)
+        {
+            if (Utilities.ButtonIcon(ref iconRect, Undo, undoTooltip,
+                    direction: UIDirection.RightThenDown))
+            {
+                ExecuteUndo();
+            }
+        }
+        else
+        {
+            // Draw disabled undo button (no interaction)
+            var disabledRect = new Rect(iconRect);
+            GUI.color = Color.grey;
+            GUI.DrawTexture(disabledRect, Undo);
+            TooltipHandler.TipRegion(disabledRect, undoTooltip);
+            GUI.color = Color.white;
+            iconRect.x += IconSize + SmallMargin; // Move to next position
+        }
+
+        // Redo button
+        var redoTooltip = _history.CanRedo
+            ? $"{I18n.Redo} ({_history.RedoCount})"
+            : I18n.Redo;
+
+        if (_history.CanRedo)
+        {
+            if (Utilities.ButtonIcon(ref iconRect, Redo, redoTooltip,
+                    direction: UIDirection.RightThenDown))
+            {
+                ExecuteRedo();
+            }
+        }
+        else
+        {
+            // Draw disabled redo button (no interaction)
+            var disabledRect = new Rect(iconRect);
+            GUI.color = Color.grey;
+            GUI.DrawTexture(disabledRect, Redo);
+            TooltipHandler.TipRegion(disabledRect, redoTooltip);
+            GUI.color = Color.white;
+            iconRect.x += IconSize + SmallMargin; // Move to next position
         }
 
         if (ModButtonManager.ActiveButtons.Count <= 1 || !ModButtonManager.AnyIssue)
@@ -352,10 +403,22 @@ public class Page_BetterModConfig : Page_ModsConfig
             return;
         }
 
-        if (Utilities.ButtonIcon(ref iconRect, Wand, I18n.SortMods))
+        if (!Utilities.ButtonIcon(ref iconRect, Wand, I18n.SortMods))
         {
-            ModButtonManager.Sort();
+            return;
         }
+
+        RecordModListState();
+        ModButtonManager.Sort();
+    }
+
+    /// <summary>
+    ///     Resets the mod list and records the current state for undo.
+    /// </summary>
+    private void ResetModListWithHistory()
+    {
+        RecordModListState();
+        ModButtonManager.Reset();
     }
 
     private void DoModListFloatMenu()
@@ -399,12 +462,16 @@ public class Page_BetterModConfig : Page_ModsConfig
     {
         var options = Utilities.NewOptionsList;
         options.AddRange(ModListManager.ModLists.Select(ml =>
-            new FloatMenuOption(ml.Name, () => ml.Import(Event.current.shift))));
+            new FloatMenuOption(ml.Name, () =>
+            {
+                RecordModListState();
+                ml.Import(Event.current.shift);
+            })));
 
         Utilities.FloatMenu(options);
     }
 
-    private void DoEditModListFloatMenu()
+    private static void DoEditModListFloatMenu()
     {
         var options = Utilities.NewOptionsList;
         options.AddRange(ModListManager.ModLists.Select(ModListManager.GetEditSubMenuFor));
@@ -419,7 +486,11 @@ public class Page_BetterModConfig : Page_ModsConfig
         {
             var name = Path.GetFileNameWithoutExtension(fi.Name);
             return new FloatMenuOption(name,
-                () => { ModList.FromSave(name, fi.FullName).Import(Event.current.shift); });
+                () =>
+                {
+                    RecordModListState();
+                    ModList.FromSave(name, fi.FullName).Import(Event.current.shift);
+                });
         }));
         Utilities.FloatMenu(options);
     }
@@ -516,6 +587,7 @@ public class Page_BetterModConfig : Page_ModsConfig
                     break;
                 case KeyCode.Return:
                 case KeyCode.KeypadEnter:
+                    RecordModListState();
                     Selected.Active = true;
                     if (FilteredAvailableButtons.Any())
                     {
@@ -531,6 +603,7 @@ public class Page_BetterModConfig : Page_ModsConfig
                 case KeyCode.RightArrow:
                     if (shift)
                     {
+                        RecordModListState();
                         Selected.Active = true;
                         Selected = Selected; // sets _focusElement, _focusArea, plays sound.
                     }
@@ -600,6 +673,7 @@ public class Page_BetterModConfig : Page_ModsConfig
             case KeyCode.Return:
             case KeyCode.KeypadEnter:
             case KeyCode.Delete:
+                RecordModListState();
                 Selected.Active = false;
                 if (FilteredActiveButtons.Any())
                 {
@@ -615,6 +689,7 @@ public class Page_BetterModConfig : Page_ModsConfig
             case KeyCode.LeftArrow:
                 if (shift)
                 {
+                    RecordModListState();
                     Selected.Active = false;
                     Selected = Selected; // sets _focusArea, _focusElement, plays sound.
                 }
@@ -634,6 +709,8 @@ public class Page_BetterModConfig : Page_ModsConfig
             return;
         }
 
+        RecordModListState();
+
         // is only called from active.
         ModButtonManager.Insert(Selected,
             ModButtonManager.ActiveButtons.IndexOf(FilteredActiveButtons.ElementAt(_focusElement - 1)));
@@ -642,12 +719,14 @@ public class Page_BetterModConfig : Page_ModsConfig
 
     private void MoveTop()
     {
+        RecordModListState();
         ModButtonManager.Insert(Selected, 0);
         Selected = Selected;
     }
 
     private void MoveBottom()
     {
+        RecordModListState();
         ModButtonManager.Insert(Selected, ModButtonManager.ActiveButtons.Count);
         Selected = Selected;
     }
@@ -658,6 +737,8 @@ public class Page_BetterModConfig : Page_ModsConfig
         {
             return;
         }
+
+        RecordModListState();
 
         // is only called from active.
         ModButtonManager.Insert(Selected,
@@ -689,7 +770,7 @@ public class Page_BetterModConfig : Page_ModsConfig
         return IndexAt(mods, scrollposition.y + offset);
     }
 
-    private int IndexAt<T>(IEnumerable<T> mods, float position) where T : ModButton
+    private static int IndexAt<T>(IEnumerable<T> mods, float position) where T : ModButton
     {
         if (!mods.Any())
         {
@@ -740,6 +821,120 @@ public class Page_BetterModConfig : Page_ModsConfig
 
         var index = mods.Count() - 1;
         Selected = mods.ElementAt(index);
+    }
+
+    /// <summary>
+    ///     Records the current mod list state for undo/redo functionality.
+    ///     Should be called before any operation that modifies the active mod list.
+    ///     Only records if the state is actually different from the last recorded state.
+    /// </summary>
+    private void RecordModListState()
+    {
+        // Don't record when applying a history state
+        if (_applyingHistoryState)
+        {
+            return;
+        }
+
+        var currentState = ModButtonManager.ActiveButtons.OfType<ModButton_Installed>()
+            .Select(b => b.Identifier).ToList();
+
+        // Only record if this state is different from the last recorded state
+        // This check happens in ModListHistory.RecordState, but we can avoid
+        // creating the list if we know there's nothing to record
+        _history.RecordState(currentState);
+    }
+
+    /// <summary>
+    ///     Public method to allow external dialogs to record mod list state before making changes.
+    /// </summary>
+    public void Notify_RecordingModListChange()
+    {
+        RecordModListState();
+    }
+
+    /// <summary>
+    ///     Executes an undo operation, restoring the previous mod list state.
+    /// </summary>
+    private void ExecuteUndo()
+    {
+        if (!_history.CanUndo)
+        {
+            return;
+        }
+
+        // Get current state before undoing
+        var currentState = ModButtonManager.ActiveButtons.OfType<ModButton_Installed>()
+            .Select(b => b.Identifier).ToList();
+
+        var previousState = _history.Undo(currentState);
+        if (previousState != null)
+        {
+            ApplyModListState(previousState, false);
+        }
+    }
+
+    /// <summary>
+    ///     Executes a redo operation, restoring the next mod list state.
+    /// </summary>
+    private void ExecuteRedo()
+    {
+        if (!_history.CanRedo)
+        {
+            return;
+        }
+
+        // Get current state before redoing
+        var currentState = ModButtonManager.ActiveButtons.OfType<ModButton_Installed>()
+            .Select(b => b.Identifier).ToList();
+
+        var nextState = _history.Redo(currentState);
+        if (nextState != null)
+        {
+            ApplyModListState(nextState, false);
+        }
+    }
+
+    /// <summary>
+    ///     Applies a specific mod list state, reconstructing the active mod list.
+    /// </summary>
+    /// <param name="modOrder">List of mod identifiers in the desired order.</param>
+    /// <param name="recordHistory">Whether to record this state change in history.</param>
+    private void ApplyModListState(List<string> modOrder, bool recordHistory = true)
+    {
+        // Prevent recording history during state application
+        _applyingHistoryState = true;
+
+        try
+        {
+            // Deactivate all currently active mods
+            var currentActive = ModButtonManager.ActiveButtons.OfType<ModButton_Installed>().ToList();
+            foreach (var button in currentActive)
+            {
+                button.Active = false;
+            }
+
+            // Reactivate mods in the specified order
+            foreach (var identifier in modOrder)
+            {
+                var button = ModButtonManager.AllButtons.OfType<ModButton_Installed>()
+                    .FirstOrDefault(b => b.Identifier == identifier);
+                button?.Active = true;
+            }
+
+            // Notify the system of the change
+            ModButtonManager.Notify_ModListChanged();
+        }
+        finally
+        {
+            _applyingHistoryState = false;
+        }
+
+        // Optionally record the new state
+        if (recordHistory)
+        {
+            RecordModListState();
+        }
     }
 
     private void EnsureVisible(ref Vector2 scrollPosition, int index)
@@ -796,18 +991,22 @@ public class Page_BetterModConfig : Page_ModsConfig
         Widgets.BeginScrollView(outRect, ref _availableScrollPosition, viewRect);
 
         // Virtualized rendering: only call DoModButton for buttons in the visible window.
-        // With 2000+ mods, processing all of them every frame triggers Manifest.For for every mod.
+        // With 2000+ mods, processing all of them every frame triggers Manifest.For every mod.
         var firstVisible = Mathf.Max(0, Mathf.FloorToInt(_availableScrollPosition.y / ModButtonHeight));
         var lastVisible = Mathf.Min(
             buttons.Count - 1,
             firstVisible + Mathf.CeilToInt(outRect.height / ModButtonHeight) + 1);
-        modRect.y = viewRect.yMin + firstVisible * ModButtonHeight;
+        modRect.y = viewRect.yMin + (firstVisible * ModButtonHeight);
         var alternate = firstVisible % 2 != 0;
 
         for (var i = firstVisible; i <= lastVisible; i++)
         {
             var button = buttons[i];
-            button.DoModButton(modRect, alternate, () => Selected = button, () => button.Active = true,
+            button.DoModButton(modRect, alternate, () => Selected = button, () =>
+                {
+                    RecordModListState();
+                    button.Active = true;
+                },
                 _availableFilterVisible, _availableFilter);
             alternate = !alternate;
             modRect.y += ModButtonHeight;
@@ -824,6 +1023,7 @@ public class Page_BetterModConfig : Page_ModsConfig
 
         if (dropped)
         {
+            RecordModListState();
             DraggingManager.Dragged.Active = false;
         }
 
@@ -886,6 +1086,16 @@ public class Page_BetterModConfig : Page_ModsConfig
                     : ModButtonManager.ActiveButtons.IndexOf(insertBefore);
             }
 
+            // Only record state if the mod is actually moving to a different position
+            // Account for Insert's adjustment logic: if currentIndex < dropIndex, dropIndex is decremented
+            var currentIndex = ModButtonManager.ActiveButtons.IndexOf(DraggingManager.Dragged);
+            var adjustedDropIndex = currentIndex < dropIndex ? dropIndex - 1 : dropIndex;
+
+            if (currentIndex != adjustedDropIndex)
+            {
+                RecordModListState();
+            }
+
             ModButtonManager.Insert(DraggingManager.Dragged, dropIndex);
         }
 
@@ -900,14 +1110,18 @@ public class Page_BetterModConfig : Page_ModsConfig
         var lastVisible = Mathf.Min(
             buttons.Count - 1,
             firstVisible + Mathf.CeilToInt(outRect.height / ModButtonHeight) + 1);
-        modRect.y = viewRect.yMin + firstVisible * ModButtonHeight;
+        modRect.y = viewRect.yMin + (firstVisible * ModButtonHeight);
         var alternate = firstVisible % 2 != 0;
 
         for (var i = firstVisible; i <= lastVisible; i++)
         {
             var mod = buttons[i];
 
-            mod.DoModButton(modRect, alternate, () => Selected = mod, () => mod.Active = false,
+            mod.DoModButton(modRect, alternate, () => Selected = mod, () =>
+                {
+                    RecordModListState();
+                    mod.Active = false;
+                },
                 _activeFilterVisible, _activeFilter);
             alternate = !alternate;
 
@@ -1074,6 +1288,10 @@ public class Page_BetterModConfig : Page_ModsConfig
         ModButtonManager.Notify_RecacheIssues();
         Selected = ModButtonManager.AvailableButtons.FirstOrDefault() ??
                    ModButtonManager.ActiveButtons.FirstOrDefault();
+
+        // Clear undo/redo history for new session
+        // Don't record initial state - it will be recorded before the first change
+        _history.Clear();
     }
 
     public override void OnAcceptKeyPressed()

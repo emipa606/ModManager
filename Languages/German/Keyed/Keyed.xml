@@ -188,4 +188,6 @@
   <!-- End deprecated -->
   <!-- Start replacement strings for import/export -->
   <!-- End replacement strings -->
+  <Fluffy.ModManager.Undo>Rückgängig</Fluffy.ModManager.Undo>
+  <Fluffy.ModManager.Redo>Wiederholen</Fluffy.ModManager.Redo>
 </LanguageData>

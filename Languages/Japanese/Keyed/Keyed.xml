@@ -182,4 +182,6 @@
   <Fluffy.ModManager.ResetLabel>すべての設定をリセットする</Fluffy.ModManager.ResetLabel>
   <Fluffy.ModManager.BackgroundColor>背景色</Fluffy.ModManager.BackgroundColor>
   <Fluffy.ModManager.CachingModsMessage>modlistがロードされます。</Fluffy.ModManager.CachingModsMessage>
+  <Fluffy.ModManager.Undo>元に戻す</Fluffy.ModManager.Undo>
+  <Fluffy.ModManager.Redo>やり直し</Fluffy.ModManager.Redo>
 </LanguageData>

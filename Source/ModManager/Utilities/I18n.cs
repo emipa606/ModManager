@@ -28,6 +28,8 @@ public static class I18n
     public static readonly string Later = Key("Later").Translate();
     public static readonly string Dependencies = Key("Dependencies").Translate();
     public static readonly string Details = Key("Details").Translate();
+    public static readonly string Undo = Key("Undo").Translate();
+    public static readonly string Redo = Key("Redo").Translate();
 
     public static readonly string OK = "OK".Translate(); // core
     public static readonly string Yes = "Yes".Translate(); // core
